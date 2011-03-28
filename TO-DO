@@ -1,0 +1,35 @@
+= To-do list
+
+== Documentation
+* Further improve RDoc support
+* DocBook based tutorial
+* FAQ section
+* Intro to EDI in general
+* Outlook: More components (of a real EDI/EAI server), e.g. for messaging
+
+== XML support
+* DTD generation from Diagrams
+
+== Core features
+* E: more SV4 support, I-EDI support
+* E: Support for code lists, subsets, restricted codelists
+* Recovery from parsing errors, ability to skip faulty messages
+* Consider a "C" extension for fast segmentation of plain EDIFACT data
+* Generic support for CSV/variable-length and fixed record formats?
+* Add a generic number generator
+* Add EAN/GTIN/EPC helpers
+
+== XPath support
+* method "each" accepting XPath parameter
+* Index op [] accepting XPath 
+* More XPath expressions + corresponding methods
+
+== Applications
+* Better list mode in editool.rb
+
+
+== Test suite
+* Extend
+
+== Details
+* Avoid module name 'Dir' - might collide with std. classname 'Dir'

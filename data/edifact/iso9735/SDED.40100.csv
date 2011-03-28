@@ -1,0 +1,130 @@
+0001;a4;C;Syntax identifier
+0002;an1;C;Syntax version number
+0004;an..35;C;Interchange sender identification
+0007;an..4;C;Identification code qualifier
+0008;an..35;C;Interchange sender internal identification
+0010;an..35;C;Interchange recipient identification
+0014;an..35;C;Interchange recipient internal identification
+0017;n8;C;Date
+0019;n4;C;Time
+0020;an..14;C;Interchange control reference
+0022;an..14;C;Recipient reference/password
+0025;an2;C;Recipient reference/password qualifier
+0026;an..14;C;Application reference
+0029;a1;C;Processing priority code
+0031;n1;C;Acknowledgement request
+0032;an..35;C;Interchange agreement identifier
+0035;n1;C;Test indicator
+0036;n..6;C;Interchange control count
+0038;an..6;C;Message group identification
+0040;an..35;C;Application sender identification
+0042;an..35;C;Interchange sender internal sub-identification
+0044;an..35;C;Application recipient identification
+0046;an..35;C;Interchange recipient internal sub-identification
+0048;an..14;C;Group reference number
+0051;an..3;C;Controlling agency, coded
+0052;an..3;C;Message version number
+0054;an..3;C;Message release number
+0057;an..6;C;Association assigned code
+0058;an..14;C;Application password
+0060;n..6;C;Group control count
+0062;an..14;C;Message reference number
+0065;an..6;C;Message type
+0068;an..35;C;Common access reference
+0070;n..2;C;Sequence of transfers
+0073;a1;C;First and last transfer
+0074;n..10;C;Number of segments in a message
+0076;an2;C;Syntax release number
+0080;an..6;C;Service code list directory version number
+0081;a1;C;Section identification
+0083;an..3;C;Action, coded
+0085;an..3;C;Syntax error, coded
+0087;an..4;C;Anti-collision segment group identification
+0096;n..6;C;Segment position in message body
+0098;n..3;C;Erroneous data element position in segment
+0104;n..3;C;Erroneous component data element position
+0110;an..6;C;Code list directory version number
+0113;an..6;C;Message type sub-function identification
+0115;an..14;C;Message subset identification
+0116;an..3;C;Message subset version number
+0118;an..3;C;Message subset release number
+0121;an..14;C;Message implementation guideline identification
+0122;an..3;C;Message implementation guideline version number
+0124;an..3;C;Message implementation guideline release number
+0127;an..14;C;Scenario identification
+0128;an..3;C;Scenario version number
+0130;an..3;C;Scenario release number
+0133;an..3;C;Character encoding, coded
+0135;an..3;C;Service segment tag, coded
+0136;n..6;C;Erroneous data element occurrence
+0138;n..6;C;Security segment position
+0300;an..35;C;Initiator control reference
+0303;an..35;C;Initiator reference identification
+0304;an..35;C;Responder control reference
+0306;an..35;C;Transaction control reference
+0311;an..14;C;Dialogue identification
+0314;an..15;C;Event time
+0320;n..6;C;Sender sequence number
+0323;a1;C;Transfer position, coded
+0325;a1;C;Duplicate Indicator
+0331;an..3;C;Report function, coded
+0332;an..70;C;Status
+0333;an..3;C;Status, coded
+0335;an..3;C;Language, coded
+0336;n4;C;Time offset
+0338;n..8;C;Event date
+0340;an..35;C;Interactive message reference number
+0342;an..3;C;Dialogue version number
+0344;an..3;C;Dialogue release number
+0501;an..3;C;Security service, coded
+0503;an..3;C;Response type, coded
+0505;an..3;C;Filter function, coded
+0507;an..3;C;Original character set encoding, coded
+0509;an..3;C;Role of security provider, coded
+0511;an..1024;C;Security party identification
+0513;an..3;C;Security party code list qualifier
+0515;an..3;C;Security party code list responsible agency, coded
+0517;an..3;C;Date and time qualifier
+0518;an..35;C;Encryption reference number
+0520;an..35;C;Security sequence number
+0523;an..3;C;Use of algorithm, coded
+0525;an..3;C;Cryptographic mode of operation, coded
+0527;an..3;C;Algorithm, coded
+0529;an..3;C;Algorithm code list identifier
+0531;an..3;C;Algorithm parameter qualifier
+0533;an..3;C;Mode of operation code list identifier
+0534;an..14;C;Security reference number
+0536;an..35;C;Certificate reference
+0538;an..35;C;Key name
+0541;an..3;C;Scope of security application, coded
+0543;an..3;C;Certificate original character set repertoire, coded
+0545;an..3;C;Certificate syntax and version, coded
+0546;an..35;C;User authorisation level
+0548;an..4;C;Service character for signature
+0551;an..3;C;Service character for signature qualifier
+0554;an..512;C;Algorithm parameter value
+0556;n..18;C;Length of data in octets of bits
+0558;an..70;C;List parameter
+0560;an..1024;C;Validation value
+0563;an..3;C;Validation value qualifier
+0565;an..3;C;Message relation, coded
+0567;an..3;C;Security status, coded
+0569;an..3;C;Revocation reason, coded
+0571;an..3;C;Security error, coded
+0572;n..4;C;Certificate sequence number
+0575;an..3;C;List parameter qualifier
+0577;an..3;C;Security party qualifier
+0579;an..3;C;Key management function qualifier
+0582;n..2;C;Number of padding bytes
+0586;an..35;C;Security party name
+0588;n..10;C;Number of security segments
+0591;an..3;C;Padding mechanism, coded
+0601;an..3;C;Padding mechanism code list identifier
+0800;an..35;C;Package reference number
+0802;an..35;C;Reference identification number
+0805;an..3;C;Object type qualifier
+0808;an..256;C;Object type attribute
+0809;an..256;C;Object type attribute identification
+0810;n..18;C;Length of object in octets of bits
+0813;an..3;C;Reference qualifier
+0814;n..3;C;Number of segments before object

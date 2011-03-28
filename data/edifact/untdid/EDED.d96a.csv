@@ -1,0 +1,462 @@
+1000;an..35;C;Document/message name
+1001;an..3;C;Document/message name, coded
+1004;an..35;C;Document/message number
+1049;an..3;C;Message section, coded
+1050;an..6;C;Sequence number
+1052;an..35;C;Message item number
+1054;n..6;C;Message sub-item number
+1056;an..9;C;Version
+1058;an..9;C;Release
+1060;an..6;C;Revision number
+1073;an..3;C;Document line indicator, coded
+1082;n..6;C;Line item number
+1131;an..3;C;Code list qualifier
+1153;an..3;C;Reference qualifier
+1154;an..35;C;Reference number
+1156;an..6;C;Line number
+1159;an..3;C;Sequence number source, coded
+1218;n..2;C;Number of originals of document required
+1220;n..2;C;Number of copies of document required
+1222;n..2;C;Configuration level
+1225;an..3;C;Message function, coded
+1227;an..3;C;Calculation sequence indicator, coded
+1228;an..35;C;Action request/notification
+1229;an..3;C;Action request/notification, coded
+1230;an..35;C;Allowance or charge number
+1245;an..3;C;Status indicator, coded
+1312;n..4;C;Consignment load sequence number
+1366;an..35;C;Document/message source
+1373;an..3;C;Document/message status, coded
+1475;an..6;C;Message type identifier
+1476;an..2;C;Control agency
+1490;n..4;C;Consolidation item number
+1496;n..5;C;Goods item number
+1501;an..3;C;Computer environment details qualifier
+1502;an..35;C;Data format
+1503;an..3;C;Data format, coded
+1505;an..3;C;Value list type, coded
+1507;an..3;C;Class designator, coded
+1508;an..35;C;File name
+1510;an..35;C;Computer environment
+1511;an..3;C;Computer environment, coded
+1514;an..70;C;Value list name
+1516;an..17;C;File format
+1518;an..35;C;Value list identifier
+1520;an..35;C;Data set identifier
+1523;an..6;C;Association assigned identification
+2005;an..3;C;Date/time/period qualifier
+2009;an..3;C;Time relation, coded
+2013;an..3;C;Frequency, coded
+2015;an..3;C;Despatch pattern, coded
+2017;an..3;C;Despatch pattern timing, coded
+2151;an..3;C;Type of period, coded
+2152;n..3;C;Number of periods
+2379;an..3;C;Date/time/period format qualifier
+2380;an..35;C;Date/time/period
+2475;an..3;C;Payment time reference, coded
+3035;an..3;C;Party qualifier
+3036;an..35;C;Party name
+3039;an..35;C;Party id. identification
+3042;an..35;C;Street and number/p.o. box
+3045;an..3;C;Party name format, coded
+3055;an..3;C;Code list responsible agency, coded
+3077;an..3;C;Test media, coded
+3124;an..35;C;Name and address line
+3127;an..17;C;Carrier identification
+3128;an..35;C;Carrier name
+3131;an..3;C;Address type, coded
+3139;an..3;C;Contact function, coded
+3148;an..512;C;Communication number
+3153;an..3;C;Communication channel identifier, coded
+3155;an..3;C;Communication channel qualifier
+3164;an..35;C;City name
+3192;an..35;C;Account holder name
+3194;an..35;C;Account holder number
+3207;an..3;C;Country, coded
+3222;an..70;C;Related place/location one
+3223;an..25;C;Related place/location one identification
+3224;an..70;C;Place/location
+3225;an..25;C;Place/location identification
+3227;an..3;C;Place/location qualifier
+3228;an..35;C;Country sub-entity
+3229;an..9;C;Country sub-entity identification
+3232;an..70;C;Related place/location two
+3233;an..25;C;Related place/location two identification
+3236;an..35;C;Sample location
+3237;an..3;C;Sample location, coded
+3239;an..3;C;Country of origin, coded
+3251;an..9;C;Postcode identification
+3279;an..3;C;Geographic environment, coded
+3285;an..17;C;Recipient of the instruction identification
+3286;an..70;C;Address component
+3289;an..3;C;Person characteristic qualifier
+3292;a..35;C;Nationality
+3293;an..3;C;Nationality, coded
+3295;an..3;C;Name component original representation, coded
+3299;an..3;C;Address purpose, coded
+3301;an..17;C;Party enacting instruction identification
+3310;an..70;C;Person inherited characteristic
+3311;an..8;C;Person inherited characteristic identification
+3397;an..3;C;Name status, coded
+3398;an..70;C;Name component
+3401;an..3;C;Name component status, coded
+3403;an..3;C;Name type, coded
+3405;an..3;C;Name component qualifier
+3412;an..35;C;Department or employee
+3413;an..17;C;Department or employee identification
+3432;an..70;C;Institution name
+3433;an..11;C;Institution name identification
+3434;an..17;C;Institution branch number
+3436;an..70;C;Institution branch place
+3446;an..20;C;Party tax identification number
+3452;an..35;C;Language
+3453;an..3;C;Language, coded
+3455;an..3;C;Language qualifier
+3475;an..3;C;Address status, coded
+3477;an..3;C;Address format, coded
+3478;an..35;C;Marital status
+3479;an..3;C;Marital status, coded
+3482;an..35;C;Religion
+3483;an..3;C;Religion, coded
+3493;an..3;C;Nationality qualifier
+3494;an..35;C;Job title
+3496;an..17;C;Sales channel identifier
+3499;an..3;C;Sex, coded
+4000;an..35;C;Reference version number
+4017;an..3;C;Delivery plan status indicator, coded
+4022;an..70;C;Business description
+4025;an..3;C;Business function, coded
+4027;an..3;C;Business function qualifier
+4035;an..3;C;Priority qualifier
+4036;an..35;C;Priority
+4037;an..3;C;Priority, coded
+4038;an..35;C;Additional safety information
+4039;an..3;C;Additional safety information, coded
+4043;an..3;C;Class of trade, coded
+4044;an..70;C;Safety section name
+4046;n..2;C;Safety section
+4052;an..70;C;Terms of delivery or transport
+4053;an..3;C;Terms of delivery or transport, coded
+4055;an..3;C;Terms of delivery or transport function, coded
+4065;an..3;C;Contract and carriage condition, coded
+4078;an..70;C;Handling instructions
+4079;an..3;C;Handling instructions, coded
+4183;an..3;C;Special conditions, coded
+4215;an..3;C;Transport charges method of payment, coded
+4219;an..3;C;Transport priority, coded
+4221;an..3;C;Discrepancy, coded
+4233;an..3;C;Marking instructions, coded
+4237;an..3;C;Prepaid/collect indicator, coded
+4276;an..35;C;Terms of payment
+4277;an..17;C;Terms of payment identification
+4279;an..3;C;Payment terms type qualifier
+4294;an..35;C;Change reason
+4295;an..3;C;Change reason, coded
+4343;an..3;C;Response type, coded
+4347;an..3;C;Product id. function qualifier
+4383;an..3;C;Bank operation, coded
+4400;an..35;C;Instruction
+4401;an..3;C;Instruction, coded
+4403;an..3;C;Instruction qualifier
+4405;an..3;C;Status, coded
+4407;an..3;C;Sample process status, coded
+4415;an..17;C;Test method identification
+4416;an..70;C;Test description
+4419;an..3;C;Test route of administering, coded
+4424;an..35;C;Test reason
+4425;an..17;C;Test reason identification
+4431;an..3;C;Payment guarantee, coded
+4435;an..3;C;Payment channel, coded
+4439;an..3;C;Payment conditions, coded
+4440;an..70;C;Free text
+4441;an..3;C;Free text, coded
+4451;an..3;C;Text subject qualifier
+4453;an..3;C;Text function, coded
+4455;an..3;C;Back order, coded
+4457;an..3;C;Product/service substitution, coded
+4461;an..3;C;Payment means, coded
+4463;an..3;C;Intra-company payment, coded
+4465;an..3;C;Adjustment reason, coded
+4471;an..3;C;Settlement, coded
+4487;an..3;C;Type of financial transaction, coded
+4493;an..3;C;Delivery requirements, coded
+4494;an..35;C;Insurance cover
+4495;an..17;C;Insurance cover identification
+4497;an..3;C;Insurance cover type, coded
+4499;an..3;C;Reason for inventory movement, coded
+4501;an..3;C;Inventory movement direction, coded
+4503;an..3;C;Inventory balance method, coded
+4505;an..3;C;Credit cover request, coded
+4507;an..3;C;Credit cover response, coded
+4509;an..3;C;Credit cover reason, coded
+4510;an..35;C;Requested information
+4511;an..3;C;Requested information, coded
+4513;an..3;C;Maintenance operation, coded
+4517;an..3;C;Seal condition, coded
+5004;n..18;C;Monetary amount
+5007;an..3;C;Monetary function, coded
+5013;an..3;C;Index qualifier
+5025;an..3;C;Monetary amount type qualifier
+5027;an..3;C;Index type, coded
+5030;n..6;C;Index value
+5039;an..3;C;Index value representation, coded
+5047;an..3;C;Contribution qualifier
+5048;an..35;C;Contribution type
+5049;an..3;C;Contribution type, coded
+5118;n..15;C;Price
+5125;an..3;C;Price qualifier
+5152;an..35;C;Duty/tax/fee type
+5153;an..3;C;Duty/tax/fee type, coded
+5189;an..3;C;Charge/allowance description, coded
+5213;an..3;C;Sub-line price change, coded
+5237;an..3;C;Charge category, coded
+5242;an..35;C;Rate/tariff class
+5243;an..9;C;Rate/tariff class identification
+5245;an..3;C;Percentage qualifier
+5249;an..3;C;Percentage basis, coded
+5273;an..12;C;Duty/tax/fee rate basis identification
+5275;an..6;C;Supplementary rate/tariff basis identification
+5278;an..17;C;Duty/tax/fee rate
+5279;an..7;C;Duty/tax/fee rate identification
+5283;an..3;C;Duty/tax/fee function qualifier
+5284;n..9;C;Unit price basis
+5286;an..15;C;Duty/tax/fee assessment basis
+5289;an..6;C;Duty/tax/fee account identification
+5305;an..3;C;Duty/tax/fee category, coded
+5314;an..35;C;Remuneration type
+5315;an..3;C;Remuneration type, coded
+5375;an..3;C;Price type, coded
+5377;an..3;C;Price change indicator, coded
+5379;an..3;C;Product group type, coded
+5387;an..3;C;Price type qualifier
+5388;an..35;C;Product group
+5389;an..3;C;Product group, coded
+5393;an..3;C;Price multiplier qualifier
+5394;n..12;C;Price multiplier
+5402;n..12;C;Rate of exchange
+5419;an..3;C;Rate type qualifier
+5420;n..15;C;Rate per unit
+5463;an..3;C;Allowance or charge qualifier
+5479;an..3;C;Relation, coded
+5482;n..10;C;Percentage
+5495;an..3;C;Sub-line indicator, coded
+6008;n..15;C;Height dimension
+6060;n..15;C;Quantity
+6063;an..3;C;Quantity qualifier
+6064;n..15;C;Quantity difference
+6066;n..18;C;Control value
+6069;an..3;C;Control qualifier
+6071;an..3;C;Frequency qualifier
+6072;n..9;C;Frequency value
+6074;n..6;C;Confidence limit
+6140;n..15;C;Width dimension
+6145;an..3;C;Dimension qualifier
+6152;n..18;C;Range maximum
+6154;an..70;C;Measurement attribute
+6155;an..3;C;Measurement attribute, coded
+6162;n..18;C;Range minimum
+6167;an..3;C;Range type qualifier
+6168;n..15;C;Length dimension
+6173;an..3;C;Size qualifier
+6174;n..15;C;Size
+6176;n..7;C;Maximum number of occurrences
+6245;an..3;C;Temperature qualifier
+6246;n3;C;Temperature setting
+6311;an..3;C;Measurement application qualifier
+6313;an..3;C;Measurement dimension, coded
+6314;n..18;C;Measurement value
+6321;an..3;C;Measurement significance, coded
+6331;an..3;C;Statistic type, coded
+6341;an..3;C;Currency market exchange, coded
+6343;an..3;C;Currency qualifier
+6345;an..3;C;Currency, coded
+6347;an..3;C;Currency details qualifier
+6348;n..4;C;Currency rate base
+6350;n..15;C;Number of units
+6353;an..3;C;Number of units qualifier
+6411;an..3;C;Measure unit qualifier
+6426;n..2;C;Number of stages
+6428;n..2;C;Actual stage count
+6432;n..2;C;Significant digits
+6434;an..35;C;Statistical concept identifier
+7001;an..3;C;Physical or logical state qualifier
+7006;an..35;C;Physical or logical state
+7007;an..3;C;Physical or logical state, coded
+7008;an..35;C;Item description
+7009;an..17;C;Item description identification
+7011;an..3;C;Article availability, coded
+7036;an..35;C;Characteristic
+7037;an..17;C;Characteristic identification
+7039;an..3;C;Sample selection method, coded
+7045;an..3;C;Sample description, coded
+7047;an..3;C;Sample direction, coded
+7059;an..3;C;Property class, coded
+7064;an..35;C;Type of packages
+7065;an..17;C;Type of packages identification
+7073;an..3;C;Packaging terms and conditions, coded
+7075;an..3;C;Packaging level, coded
+7077;an..3;C;Item description type, coded
+7081;an..3;C;Item characteristic, coded
+7083;an..3;C;Configuration, coded
+7085;an..3;C;Nature of cargo, coded
+7088;an..8;C;Dangerous goods flashpoint
+7102;an..35;C;Shipping marks
+7106;n3;C;Shipment flashpoint
+7110;an..35;C;Characteristic value
+7111;an..3;C;Characteristic value, coded
+7124;n4;C;UNDG number
+7130;an..17;C;Customer authorization number
+7140;an..35;C;Item number
+7143;an..3;C;Item number type, coded
+7160;an..35;C;Special service
+7161;an..3;C;Special services, coded
+7164;an..12;C;Hierarchical id. number
+7166;an..12;C;Hierarchical parent id.
+7168;n1;C;Level number
+7186;an..35;C;Process type
+7187;an..17;C;Process type identification
+7188;an..30;C;Test revision number
+7224;n..8;C;Number of packages
+7233;an..3;C;Packaging related information, coded
+7240;n..15;C;Total number of items
+7273;an..3;C;Service requirement, coded
+7293;an..3;C;Sector/subject identification qualifier
+7294;an..35;C;Requirement or condition
+7295;an..17;C;Requirement/condition identification
+7297;an..3;C;Set identification qualifier
+7299;an..3;C;Requirement designator, coded
+7357;an..18;C;Commodity/rate identification
+7361;an..18;C;Customs code identification
+7365;an..3;C;Processing indicator, coded
+7383;an..3;C;Surface/layer indicator, coded
+7402;an..35;C;Identity number
+7405;an..3;C;Identity number qualifier
+7419;an..4;C;Hazardous material class code, identification
+7429;an..3;C;Indexing structure qualifier
+7431;an..3;C;Agreement type qualifier
+7433;an..3;C;Agreement type, coded
+7434;an..70;C;Agreement type description
+7436;an..17;C;Level one id.
+7438;an..17;C;Level two id.
+7440;an..17;C;Level three id.
+7442;an..17;C;Level four id.
+7444;an..17;C;Level five id.
+7446;an..17;C;Level six id.
+7449;an..3;C;Membership qualifier
+7450;an..35;C;Membership category
+7451;an..4;C;Membership category identification
+7452;an..35;C;Membership status
+7453;an..3;C;Membership status, coded
+7455;an..3;C;Membership level qualifier
+7456;an..35;C;Membership level
+7457;an..9;C;Membership level identification
+7491;an..3;C;Type of inventory affected, coded
+7493;an..3;C;Damage details qualifier
+7495;an..3;C;Identification qualifier
+7497;an..3;C;Component function qualifier
+7500;an..35;C;Type of damage
+7501;an..3;C;Type of damage, coded
+7502;an..35;C;Damage area
+7503;an..4;C;Damage area identification
+7504;an..35;C;Type of unit/component
+7505;an..3;C;Type of unit/component, coded
+7506;an..35;C;Component material
+7507;an..3;C;Component material, coded
+7508;an..35;C;Damage severity
+7509;an..3;C;Damage severity, coded
+7511;an..3;C;Type of marking, coded
+7512;an..35;C;Structure component identifier
+8022;an..26;C;Freight and charges
+8023;an..17;C;Freight and charges identification
+8028;an..17;C;Conveyance reference number
+8051;an..3;C;Transport stage qualifier
+8053;an..3;C;Equipment qualifier
+8066;an..17;C;Mode of transport
+8067;an..3;C;Mode of transport, coded
+8077;an..3;C;Equipment supplier, coded
+8078;an..7;C;Hazard substance/item/page number
+8092;an..10;C;Hazard code version number
+8101;an..3;C;Transit direction, coded
+8126;an..10;C;Trem card number
+8154;an..35;C;Equipment size and type
+8155;an..10;C;Equipment size and type identification
+8158;an..4;C;Hazard identification number, upper part
+8169;an..3;C;Full/empty indicator, coded
+8178;an..17;C;Type of means of transport
+8179;an..8;C;Type of means of transport identification
+8186;an4;C;Substance identification number, lower part
+8211;an..3;C;Permission for transport, coded
+8212;an..35;C;Id. of the means of transport
+8213;an..9;C;Id. of means of transport identification
+8246;an..4;C;Dangerous goods label marking
+8249;an..3;C;Equipment status, coded
+8255;an..3;C;Packing instruction, coded
+8260;an..17;C;Equipment identification number
+8273;an..3;C;Dangerous goods regulations, coded
+8275;an..3;C;Container/package status, coded
+8281;an..3;C;Transport ownership, coded
+8323;an..3;C;Transport movement, coded
+8325;an..3;C;Category of means of transport, coded
+8332;an..26;C;Equipment plan
+8334;an..35;C;Movement type
+8335;an..3;C;Movement type, coded
+8339;an..3;C;Packing group, coded
+8341;an..3;C;Haulage arrangements, coded
+8351;an..7;C;Hazard code identification
+8364;an..6;C;EMS number
+8393;an..3;C;Returnable package load contents, coded
+8395;an..3;C;Returnable package freight payment responsibility, coded
+8410;an..4;C;MFAG
+8453;an..3;C;Nationality of means of transport, coded
+8457;an..3;C;Excess transportation reason, coded
+8459;an..3;C;Excess transportation responsibility, coded
+9003;an..3;C;Employment qualifier
+9004;an..35;C;Employment category
+9005;an..3;C;Employment category, coded
+9006;an..35;C;Qualification classification
+9007;an..3;C;Qualification classification, coded
+9008;an..35;C;Occupation
+9009;an..3;C;Occupation, coded
+9010;an..35;C;Status event
+9011;an..3;C;Status event, coded
+9012;an..35;C;Status reason
+9013;an..3;C;Status reason, coded
+9015;an..3;C;Status type, coded
+9017;an..3;C;Attribute function qualifier
+9018;an..35;C;Attribute
+9019;an..3;C;Attribute, coded
+9021;an..3;C;Attribute type, coded
+9035;an..3;C;Qualification area, coded
+9141;an..3;C;Relationship qualifier
+9142;an..35;C;Relationship
+9143;an..3;C;Relationship, coded
+9146;an..4;C;Composite data element tag
+9148;an..3;C;Directory status
+9150;an..4;C;Simple data element tag
+9153;an..3;C;Simple data element character representation, coded
+9155;an..3;C;Simple data element length type, coded
+9156;n..3;C;Simple data element maximum length
+9158;n..3;C;Simple data element minimum length
+9161;an..3;C;Code set indicator, coded
+9162;an..4;C;Data element tag
+9164;an..4;C;Group identification
+9166;an..3;C;Segment tag
+9213;an..3;C;Type of duty regime, coded
+9280;an..35;C;Validation result
+9282;an..35;C;Validation key identification
+9302;an..35;C;Sealing party
+9303;an..3;C;Sealing party, coded
+9308;an..10;C;Seal number
+9321;an..8;C;Application error identification
+9353;an..3;C;Government procedure, coded
+9411;an..3;C;Government involvement, coded
+9415;an..3;C;Government agency, coded
+9417;an..3;C;Government action, coded
+9419;an..3;C;Service layer, coded
+9421;an..3;C;Stages qualifier
+9424;an..35;C;Array cell information
+9426;an..35;C;Code value
+9428;an..35;C;Array structure identifier
+9430;an..35;C;Footnote set identifier
+9432;an..35;C;Footnote identifier
+9434;an..70;C;Code name

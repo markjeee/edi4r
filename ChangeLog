@@ -1,0 +1,106 @@
+= Change log
+
+== 0.9.4.1
+
+=== News
+* XML support added (again; no separate module anymore)!
+* DIN 16557-4 now supported (one-way, EDI-to-XML)
+* New standalone tools: edi2xml.rb, xml2edi.rb
+* New testcase: test_rexml.rb
+* EDI::Interchange: New convenience methods: parse(), peek(), detect()
+* Support for compressed data (gzip via zlib, bzip2 if "bzcat" available)
+* peek(): High-speed access to (just the) Interchange header data
+
+=== Changes
+* Some optional calling parameters added
+* editool.rb: Now supporting more standards, compression, and peek mode/reports
+	
+=== Misc improvements & bug fixes
+* Bug in EDIFACT scanner fixed - scanner re-implemented
+* Windows supported now (workaround for issue with Pathname#realpath).
+  Note: Put "ruby" in front of edi4r scripts & tools when invoked
+	in pipe mode in a DOS shell, or the pipe fill fail.
+
+== 0.9.4.0
+=== New structures
+* Time: Class method "edifact", method "format" added
+* MsgGroup: Now fully supported
+
+=== Changes
+* New test case "test_minidemo" aimed at fixes in DE#to_s, see below
+* "test_basics" now covering MsgGroup tests as well
+* Special setters de0020=, de0048=, de0062=, de0340= added
+  to make header/trailer changes consistent.
+* Setters de0001=, de0002= added to prevent changes to charset and version
+* E::Message#validate: Improved
+* Tests updated to reflect new features
+
+=== Misc improvements & bug fixes
+* E::Interchange.parse: hnd.close removed; some code cleanup
+* EDI::MsgGroup: Completed
+* EDI::E::MsgGroup: Completed, now fully supported
+* E::DE#to_s:  Fix - now calling super()
+* DE#to_s:     Fix - adding leading zeroes for too short numeric values
+* DE#validate: No more warnings if format e.g. n6 and fixable
+* E::Illegal_Charset_Patterns: Bugfix ('+' missing, '*' included twice)
+
+	
+== 0.9.3.1
+Bugfix release, now integrated in 0.9.4
+
+=== New structures
+* (none so far)
+
+=== Changes
+* New test case "test_minidemo" aimed at fixes in DE#to_s, see below
+
+=== Misc improvements & bug fixes
+* E::Interchange.parse: hnd.close removed; some code cleanup
+* E::DE#to_s:  Fix - now calling super()
+* DE#to_s:     Fix - adding leading zeroes for too short numeric values
+* DE#validate: No more warnings if format e.g. n6 and fixable
+
+	
+== 0.9.3
+=== New structures
+* Improved class hierarchy
+* Methods: More consistent, better inheritance
+* Removed: write() (use to_s !)
+* inspect(): more attributes for segments 
+* EDI::E::UNA now bundles all UNA related methods
+
+=== Changes
+* New access to DE/CDE arrays (like ) through prefix 'a'
+  prevents users from accidentally overwriting a DE.
+  Previous access through cCxxx[] or dxxxx[] will fail now.
+* Some parameters of EDI::E::Interchange.new have changed, 
+  several more added.
+* UNA handling: Now through attributes of UNA class.
+
+=== Misc improvements
+* Improved handling of both decimal signs
+* Bug removed in escaping of special chars
+* Refactoring of some internals
+* RDoc now usable - completely overhauled.
+
+== 0.9.2
+=== Misc improvements
+* New parsing basics: "String::separate" replaced by EDI::E::edi_split
+* Parsing bug removed
+* More validation features
+* "inspect", "find_all" added
+* "descendants_and_self" etc. added to EDI::Segment
+* bin/editool.rb added (validate, list, inspect EDI data)
+
+== 0.9.1
+=== First release as a gem
+* Split from the edi4r core package, turned into a separate one.
+* Unit tests added
+* RDoc documentation added
+* Modular loading scheme for normdata added (through EDI_NDB_PATH)
+* Parameter usage overhauled
+* Rolled into a gem
+
+== 0.8.x
+* Used internally for projects and teaching
+

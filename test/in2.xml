@@ -1,0 +1,350 @@
+<?xml version='1.0'?>
+<!DOCTYPE Interchange PUBLIC
+         '-//FH Wiesbaden FB DCSM//DTD XML Representation of EDI data V1.1//EN'
+         'http://edi01.informatik.fh-wiesbaden.de/edi4r/edi4r-1.1.dtd'>
+<Interchange version='3' standard_key='E'>
+  <Header>
+    <Segment name='UNB'>
+      <CDE name='S001'>
+        <DE name='0001'>UNOC</DE>
+        <DE name='0002'>3</DE>
+      </CDE>
+      <CDE name='S002'>
+        <DE name='0004'>2965197100002</DE>
+        <DE name='0007'>14</DE>
+      </CDE>
+      <CDE name='S003'>
+        <DE name='0010'>2165197000009</DE>
+        <DE name='0007'>14</DE>
+      </CDE>
+      <CDE name='S004'>
+        <DE name='0017'>060501</DE>
+        <DE name='0019'>1611</DE>
+      </CDE>
+      <DE name='0020'>1146492687.229</DE>
+      <DE name='0032'>EANCOM</DE>
+      <DE name='0035'>1</DE>
+    </Segment>
+    <Parameter name='UNA'>UNA:+.? &apos;</Parameter>
+  </Header>
+  <Message>
+    <Header>
+      <Segment name='UNH'>
+        <DE name='0062'>1</DE>
+        <CDE name='S009'>
+          <DE name='0065'>ORDERS</DE>
+          <DE name='0052'>D</DE>
+          <DE name='0054'>01B</DE>
+          <DE name='0051'>UN</DE>
+          <DE name='0057'>EAN010</DE>
+        </CDE>
+      </Segment>
+    </Header>
+    <Segment name='BGM'>
+      <CDE name='C002'>
+        <DE name='1001'>220</DE>
+      </CDE>
+      <CDE name='C106'>
+        <DE name='1004'>12345</DE>
+      </CDE>
+      <DE name='1225'>9</DE>
+    </Segment>
+    <Segment name='DTM'>
+      <CDE name='C507'>
+        <DE name='2005'>137</DE>
+        <DE name='2380'>20040712</DE>
+        <DE name='2379'>102</DE>
+      </CDE>
+    </Segment>
+    <Segment name='DTM'>
+      <CDE name='C507'>
+        <DE name='2005'>2</DE>
+        <DE name='2380'>200404141245200404141420</DE>
+        <DE name='2379'>719</DE>
+      </CDE>
+    </Segment>
+    <SegmentGroup name='SG1'>
+      <Segment name='RFF'>
+        <CDE name='C506'>
+          <DE name='1153'>PD</DE>
+          <DE name='1154'>4712</DE>
+        </CDE>
+      </Segment>
+    </SegmentGroup>
+    <SegmentGroup name='SG2'>
+      <Segment name='NAD'>
+        <DE name='3035'>SU</DE>
+        <CDE name='C082'>
+          <DE name='3039'>2165197000009</DE>
+          <DE name='3055'>9</DE>
+        </CDE>
+      </Segment>
+      <SegmentGroup name='SG3'>
+        <Segment name='RFF'>
+          <CDE name='C506'>
+            <DE name='1153'>YC1</DE>
+            <DE name='1154'>23456</DE>
+          </CDE>
+        </Segment>
+      </SegmentGroup>
+      <SegmentGroup name='SG3'>
+        <Segment name='RFF'>
+          <CDE name='C506'>
+            <DE name='1153'>VA</DE>
+            <DE name='1154'>DE1234512345</DE>
+          </CDE>
+        </Segment>
+      </SegmentGroup>
+    </SegmentGroup>
+    <SegmentGroup name='SG2'>
+      <Segment name='NAD'>
+        <DE name='3035'>BY</DE>
+        <CDE name='C082'>
+          <DE name='3039'>2965197100002</DE>
+          <DE name='3055'>9</DE>
+        </CDE>
+      </Segment>
+      <SegmentGroup name='SG3'>
+        <Segment name='RFF'>
+          <CDE name='C506'>
+            <DE name='1153'>VA</DE>
+            <DE name='1154'>DE1234512345</DE>
+          </CDE>
+        </Segment>
+      </SegmentGroup>
+      <SegmentGroup name='SG5'>
+        <Segment name='CTA'>
+          <DE name='3139'>PD</DE>
+          <CDE name='C056'>
+            <DE name='3413'>1144</DE>
+          </CDE>
+        </Segment>
+      </SegmentGroup>
+    </SegmentGroup>
+    <SegmentGroup name='SG2'>
+      <Segment name='NAD'>
+        <DE name='3035'>IV</DE>
+        <CDE name='C082'>
+          <DE name='3039'>2965197400003</DE>
+          <DE name='3055'>9</DE>
+        </CDE>
+      </Segment>
+      <SegmentGroup name='SG3'>
+        <Segment name='RFF'>
+          <CDE name='C506'>
+            <DE name='1153'>VA</DE>
+            <DE name='1154'>DE1234512346</DE>
+          </CDE>
+        </Segment>
+      </SegmentGroup>
+      <SegmentGroup name='SG5'>
+        <Segment name='CTA'>
+          <DE name='3139'>OC</DE>
+          <CDE name='C056'>
+            <DE name='3413'>223</DE>
+          </CDE>
+        </Segment>
+      </SegmentGroup>
+    </SegmentGroup>
+    <SegmentGroup name='SG2'>
+      <Segment name='NAD'>
+        <DE name='3035'>DP</DE>
+        <CDE name='C082'>
+          <DE name='3039'>2965197200009</DE>
+          <DE name='3055'>9</DE>
+        </CDE>
+      </Segment>
+      <SegmentGroup name='SG5'>
+        <Segment name='CTA'>
+          <DE name='3139'>DL</DE>
+          <CDE name='C056'>
+            <DE name='3413'>6677</DE>
+          </CDE>
+        </Segment>
+      </SegmentGroup>
+    </SegmentGroup>
+    <SegmentGroup name='SG2'>
+      <Segment name='NAD'>
+        <DE name='3035'>UC</DE>
+        <CDE name='C082'>
+          <DE name='3039'>2965197300006</DE>
+          <DE name='3055'>9</DE>
+        </CDE>
+      </Segment>
+      <SegmentGroup name='SG5'>
+        <Segment name='CTA'>
+          <DE name='3139'>GR</DE>
+          <CDE name='C056'>
+            <DE name='3413'>9876</DE>
+          </CDE>
+        </Segment>
+      </SegmentGroup>
+    </SegmentGroup>
+    <SegmentGroup name='SG7'>
+      <Segment name='CUX'>
+        <CDE name='C504'>
+          <DE name='6347'>2</DE>
+          <DE name='6345'>EUR</DE>
+          <DE name='6343'>9</DE>
+        </CDE>
+      </Segment>
+    </SegmentGroup>
+    <SegmentGroup name='SG28'>
+      <Segment name='LIN'>
+        <DE name='1082'>1</DE>
+        <CDE name='C212'>
+          <DE name='7140'>2165197000016</DE>
+          <DE name='7143'>SRV</DE>
+        </CDE>
+      </Segment>
+      <Segment name='PIA'>
+        <DE name='4347'>1</DE>
+        <CDE name='C212'>
+          <DE name='7140'>JEBL5023</DE>
+          <DE name='7143'>SA</DE>
+          <DE name='3055'>91</DE>
+        </CDE>
+        <CDE name='C212' instance='3'>
+          <DE name='7140'>BLJE50</DE>
+          <DE name='7143'>IN</DE>
+          <DE name='3055'>92</DE>
+        </CDE>
+      </Segment>
+      <Segment name='IMD'>
+        <DE name='7077'>A</DE>
+        <CDE name='C273'>
+          <DE name='7008'>Jeans+mehr</DE>
+        </CDE>
+      </Segment>
+      <Segment name='IMD'>
+        <DE name='7077'>F</DE>
+        <CDE name='C272'>
+          <DE name='7081'>35</DE>
+        </CDE>
+        <CDE name='C273'>
+          <DE name='7008'>Blau</DE>
+        </CDE>
+      </Segment>
+      <Segment name='IMD'>
+        <DE name='7077'>F</DE>
+        <CDE name='C272'>
+          <DE name='7081'>98</DE>
+        </CDE>
+        <CDE name='C273'>
+          <DE name='7008'>50</DE>
+        </CDE>
+      </Segment>
+      <Segment name='QTY'>
+        <CDE name='C186'>
+          <DE name='6063'>21</DE>
+          <DE name='6060'>10</DE>
+        </CDE>
+      </Segment>
+      <SegmentGroup name='SG32'>
+        <Segment name='PRI'>
+          <CDE name='C509'>
+            <DE name='5125'>AAA</DE>
+            <DE name='5118'>30</DE>
+            <DE name='5387'>LIU</DE>
+          </CDE>
+        </Segment>
+      </SegmentGroup>
+      <SegmentGroup name='SG32'>
+        <Segment name='PRI'>
+          <CDE name='C509'>
+            <DE name='5125'>AAE</DE>
+            <DE name='5118'>99</DE>
+            <DE name='5387'>SRP</DE>
+            <DE name='5284'>1</DE>
+          </CDE>
+        </Segment>
+      </SegmentGroup>
+    </SegmentGroup>
+    <SegmentGroup name='SG28'>
+      <Segment name='LIN'>
+        <DE name='1082'>2</DE>
+        <CDE name='C212'>
+          <DE name='7140'>2165197000023</DE>
+          <DE name='7143'>SRV</DE>
+        </CDE>
+      </Segment>
+      <Segment name='PIA'>
+        <DE name='4347'>1</DE>
+        <CDE name='C212'>
+          <DE name='7140'>JEBL5223</DE>
+          <DE name='7143'>SA</DE>
+          <DE name='3055'>91</DE>
+        </CDE>
+        <CDE name='C212' instance='2'>
+          <DE name='7140'>BLJE52</DE>
+          <DE name='7143'>IN</DE>
+          <DE name='3055'>92</DE>
+        </CDE>
+      </Segment>
+      <Segment name='IMD'>
+        <DE name='7077'>A</DE>
+        <CDE name='C273'>
+          <DE name='7008'>Jeans</DE>
+        </CDE>
+      </Segment>
+      <Segment name='IMD'>
+        <DE name='7077'>F</DE>
+        <CDE name='C272'>
+          <DE name='7081'>35</DE>
+        </CDE>
+        <CDE name='C273'>
+          <DE name='7008'>Blau</DE>
+        </CDE>
+      </Segment>
+      <Segment name='IMD'>
+        <DE name='7077'>F</DE>
+        <CDE name='C272'>
+          <DE name='7081'>98</DE>
+        </CDE>
+        <CDE name='C273'>
+          <DE name='7008'>52</DE>
+        </CDE>
+      </Segment>
+      <Segment name='QTY'>
+        <CDE name='C186'>
+          <DE name='6063'>21</DE>
+          <DE name='6060'>10</DE>
+        </CDE>
+      </Segment>
+      <SegmentGroup name='SG32'>
+        <Segment name='PRI'>
+          <CDE name='C509'>
+            <DE name='5125'>AAA</DE>
+            <DE name='5118'>40</DE>
+            <DE name='5387'>LIU</DE>
+          </CDE>
+        </Segment>
+      </SegmentGroup>
+      <SegmentGroup name='SG32'>
+        <Segment name='PRI'>
+          <CDE name='C509'>
+            <DE name='5125'>AAE</DE>
+            <DE name='5118'>120</DE>
+            <DE name='5387'>SRP</DE>
+            <DE name='5284'>1</DE>
+          </CDE>
+        </Segment>
+      </SegmentGroup>
+    </SegmentGroup>
+    <Segment name='UNS'>
+      <DE name='0081'>S</DE>
+    </Segment>
+    <Trailer>
+      <Segment name='UNT'>
+        <DE name='0074'>37</DE>
+        <DE name='0062'>1</DE>
+      </Segment>
+    </Trailer>
+  </Message>
+  <Trailer>
+    <Segment name='UNZ'>
+      <DE name='0036'>1</DE>
+      <DE name='0020'>1146492687.229</DE>
+    </Segment>
+  </Trailer>
+</Interchange>

@@ -1,0 +1,20 @@
+<!ELEMENT Interchange	(Header?, (Message|MsgGroup)*, Trailer?)>
+<!ELEMENT MsgGroup	(Header, Message+, Trailer?)>
+<!ELEMENT Message	(Header, (Segment|SegmentGroup)+, Trailer?)>
+<!ELEMENT Header	(Segment, Parameter*)>
+<!ELEMENT Trailer	(Segment, Parameter*)>
+<!ELEMENT SegmentGroup	(Segment|SegmentGroup)+>
+<!ELEMENT Segment	(CDE | DE)+>
+<!ELEMENT CDE		(DE+)>
+<!ELEMENT DE		(#PCDATA)>
+<!ELEMENT Parameter	(#PCDATA)>
+
+<!ATTLIST Parameter	name    NMTOKEN #REQUIRED>
+<!ATTLIST DE		name    NMTOKEN #REQUIRED
+			instance NMTOKEN "1">
+<!ATTLIST CDE		name    NMTOKEN #REQUIRED
+			instance NMTOKEN "1">
+<!ATTLIST Segment	name    NMTOKEN #REQUIRED>
+<!ATTLIST SegmentGroup	name    NMTOKEN #REQUIRED>
+<!ATTLIST Interchange	standard_key (E|I) #REQUIRED
+			version CDATA #REQUIRED>

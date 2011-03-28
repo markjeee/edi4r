@@ -1,0 +1,43 @@
+0001;a4;C;Syntax identifier
+0002;n1;C;Syntax version number
+0004;an..35;C;Sender identification
+0007;an..4;C;Partner identification code qualifier
+0008;an..14;C;Address for reverse routing
+0010;an..35;C;Recipient identification
+0013;a3;C;Service segment tag, coded
+0014;an..14;C;Routing address
+0017;n6;C;Date of preparation
+0019;n4;C;Time of preparation
+0020;an..14;C;Interchange control reference
+0022;an..14;C;Recipient's reference/password
+0025;an2;C;Recipient's reference/password qualifier
+0026;an..14;C;Application reference
+0029;a1;C;Processing priority code
+0031;n1;C;Acknowledgement request
+0032;an..35;C;Communications agreement ID
+0035;n1;C;Test indicator
+0036;n..6;C;Interchange control count
+0038;an..6;C;Functional group identification
+0040;an..35;C;Sender identification
+0044;an..35;C;Recipient's identification
+0048;an..14;C;Functional group reference number
+0051;an..2;C;Controlling agency
+0052;an..3;C;Message version number
+0054;an..3;C;Message release number
+0057;an..6;C;Association assigned code
+0058;an..14;C;Application password
+0060;n..6;C;Number of messages
+0062;an..14;C;Message reference number
+0065;an..6;C;Message type
+0068;an..35;C;Common access reference
+0070;n..2;C;Sequence of transfers
+0073;a1;C;First and last transfer
+0074;n..6;C;Number of segments in the message
+0077;an3;C;Text reference code
+0078;an..70;C;Free form text
+0081;a1;C;Section identification
+0083;an..3;C;Action, coded
+0085;an..3;C;Syntax error, coded
+0096;n..6;C;Segment position in message
+0098;n..3;C;Erroneous data element position in segment
+0104;n..3;C;Erroneous component data element position
