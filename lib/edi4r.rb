@@ -29,7 +29,7 @@ We anticipate to support several EDI syntax standards with this module:
 Our focus will be on UN/EDIFACT, the only global EDI standard we have
 that is independent of industry branches.
 
-Terms used will be borrowed from EDIFACT and applied to the other 
+Terms used will be borrowed from EDIFACT and applied to the other
 syntax standards whenever possible.
 
 A, E, and T are technically related in that they employ a compact
@@ -48,8 +48,8 @@ Message groups - if used - comprise a (group level) envelope and
 a sequence of messages.
 
 A message is a sequence of segments (sometimes also called records).
-A segment consists of a sequence of data elements (aka. fields), 
-either simple ones (DE) or composites (CDE). 
+A segment consists of a sequence of data elements (aka. fields),
+either simple ones (DE) or composites (CDE).
 Composites are sequences of simple data elements.
 
 Hence:
@@ -58,7 +58,7 @@ Hence:
 
 Syntax related information is maintained at the top (i.e. interchange) level.
 Lower-level objects like segments and DEs are aware of their syntax context
-through attibute "root", even though this context originates at the 
+through attibute "root", even though this context originates at the
 interchange level.
 
 Lower levels may add information. E.g. a message may add its message type,
@@ -80,7 +80,7 @@ which may or may not apply or be required.
 You can build a valid EDIFACT interchange simply by adding
 messages and segments - just follow your specifications.
 
-However, if you want this Ruby module to *validate* your result, 
+However, if you want this Ruby module to *validate* your result,
 the metadata are required. Similarly, in order to map from EDIFACT to
 other formats, accessing inbound segments though their hierarchical
 representation is much more convenient than processing them linearly.
@@ -142,7 +142,7 @@ module EDI
   # A simple utility class that fills a need not covered by "zlib".
   #
   # It is stripped to the essentials needed here internally.
-  # Not recommended for general use! The overhead of starting 
+  # Not recommended for general use! The overhead of starting
   # "bzcat" processes all the time is considerable, binding to a library
   # similar to 'zib' for the BZIP2 format would give much better results.
 
@@ -326,7 +326,7 @@ module EDI
 
   #########################################################################
   #
-  # A collection with header and trailer, common to Interchange, MsgGroup, 
+  # A collection with header and trailer, common to Interchange, MsgGroup,
   # and Message. Typically, header and trailer are Segment instances.
   #
   class Collection_HT < Collection
@@ -449,7 +449,7 @@ module EDI
       @content = nil # nil if empty, :messages, or :groups
     end
 
-    # Auto-detect file content, optionally decompress, return an 
+    # Auto-detect file content, optionally decompress, return an
     # Interchange object of the sub-class that matches the (unzipped) content.
     #
     # This is a convenience method.
@@ -464,18 +464,32 @@ module EDI
     # * Do not pass $stdin to this method - we could not "rewind" it!
 
     def Interchange.parse( hnd, auto_validate=true )
-      case rc=Interchange.detect( hnd )
-      when 'BZ': Interchange.parse( EDI::Bzip2Reader.new( hnd ) ) # see "peek"
-      when 'GZ': Interchange.parse( Zlib::GzipReader.new( hnd ) )
-      when 'E':  EDI::E::Interchange.parse( hnd, auto_validate )
-      when 'I':  EDI::I::Interchange.parse( hnd, auto_validate )
-      when 'XE': EDI::E::Interchange.parse_xml( REXML::Document.new(hnd) )
-      when 'XI': EDI::I::Interchange.parse_xml( REXML::Document.new(hnd) )
-      else raise "#{rc}: Unsupported format key - don\'t know how to proceed!"
+      case rc = Interchange.detect( hnd )
+      when 'BZ'
+        Interchange.parse( EDI::Bzip2Reader.new( hnd ) ) # see "peek"
+
+      when 'GZ'
+        Interchange.parse( Zlib::GzipReader.new( hnd ) )
+
+      when 'E'
+        EDI::E::Interchange.parse( hnd, auto_validate )
+
+      when 'I'
+        EDI::I::Interchange.parse( hnd, auto_validate )
+
+      when 'XE'
+        EDI::E::Interchange.parse_xml( REXML::Document.new(hnd) )
+
+      when 'XI'
+        EDI::I::Interchange.parse_xml( REXML::Document.new(hnd) )
+
+      else
+        raise "#{rc}: Unsupported format key - don\'t know how to proceed!"
+
       end
     end
 
-    # Auto-detect file content, optionally decompress, return an 
+    # Auto-detect file content, optionally decompress, return an
     # empty Interchange object of that sub-class with only the header filled.
     #
     # This is a convenience method.
@@ -485,25 +499,38 @@ module EDI
     # NOTES: See Interchange.parse
 
     def Interchange.peek( hnd=$stdin)
-      case rc=Interchange.detect( hnd )
+      case rc = Interchange.detect( hnd )
         # Does not exist yet!
 #      when 'BZ': Interchange.peek( Zlib::Bzip2Reader.new( hnd ) )
         # Temporary substitute, Unix/Linux only, low performance:
-      when 'BZ': Interchange.peek( EDI::Bzip2Reader.new( hnd ) )
+      when 'BZ'
+        Interchange.peek( EDI::Bzip2Reader.new( hnd ) )
 
-      when 'GZ': Interchange.peek( Zlib::GzipReader.new( hnd ) )
-      when 'E':  EDI::E::Interchange.peek( hnd )
-      when 'I':  EDI::I::Interchange.peek( hnd )
-      when 'XE': EDI::E::Interchange.peek_xml( REXML::Document.new(hnd) )
-      when 'XI': EDI::I::Interchange.peek_xml( REXML::Document.new(hnd) )
-      else raise "#{rc}: Unsupported format key - don\'t know how to proceed!"
+      when 'GZ'
+        Interchange.peek( Zlib::GzipReader.new( hnd ) )
+
+      when 'E'
+        EDI::E::Interchange.peek( hnd )
+
+      when 'I'
+        EDI::I::Interchange.peek( hnd )
+
+      when 'XE'
+        EDI::E::Interchange.peek_xml( REXML::Document.new(hnd) )
+
+      when 'XI'
+        EDI::I::Interchange.peek_xml( REXML::Document.new(hnd) )
+
+      else
+        raise "#{rc}: Unsupported format key - don\'t know how to proceed!"
+
       end
     end
 
     # Auto-detect the given file format & content, return format key
     #
     # Convenience method, intended for internal use only
-    # 
+    #
     def Interchange.detect( hnd ) # :nodoc:
       buf = hnd.read( 256 )
       #
@@ -514,14 +541,22 @@ module EDI
 
       re  = /(<\?xml.*?)?DOCTYPE\s+Interchange.*?\<Interchange\s+.*?standard\_key\s*=\s*(['"])(.)\2/m
       case buf
-      when /^(UNA......)?\r?\n?U[IN]B.UNO[A-Z].[1-4]/: 'E'  # UN/EDIFACT
-      when /^EDI_DC/: 'I'  # SAP IDoc
-      when re : 'X'+$3     # XML, Doctype = Interchange, syntax standard key (E, I, ...) postfix
-      when /^\037\213/: 'GZ' # gzip
-      when /^\037\235/: 'Z'  # compress
-      when /^\037\036/: 'z'  # pack
-      when /^BZh[0-\377]/:  'BZ' # bzip2
-      else; "?? (stream starts with: #{buf[0..15]})"
+      when /^(UNA......)?\r?\n?U[IN]B.UNO[A-Z].[1-4]/
+        'E'  # UN/EDIFACT
+      when /^EDI_DC/
+        'I'  # SAP IDoc
+      when re
+        'X'+$3     # XML, Doctype = Interchange, syntax standard key (E, I, ...) postfix
+      when /^\037\213/
+        'GZ' # gzip
+      when /^\037\235/
+        'Z'  # compress
+      when /^\037\036/
+        'z'  # pack
+      when /^BZh[0-\377]/
+        'BZ' # bzip2
+      else
+        "?? (stream starts with: #{buf[0..15]})"
       end
     end
 
@@ -699,7 +734,7 @@ module EDI
     def []( xpath_expr )
       return super( xpath_expr ) if xpath_expr.is_a? Integer
 
-      msg_unsupported = "Unsupported XPath expression: #{xpath_expr}" 
+      msg_unsupported = "Unsupported XPath expression: #{xpath_expr}"
 
       case xpath_expr
 
@@ -737,7 +772,7 @@ module EDI
       self
     end
 
-    private 
+    private
 
     def add (obj)
       raise "Only DE or CDE allowed here" unless obj.is_a? DE or obj.is_a? CDE
@@ -750,7 +785,7 @@ module EDI
       results << self if or_self
       child_mode = (axis=='child')
       return results unless self.is_tnode?
-      
+
       # Now add all segments in self's "tail"
       msg = parent
       index = msg.index(self)
@@ -777,7 +812,7 @@ module EDI
 
     private
 
-    # Add a DE 
+    # Add a DE
 
     def add( obj )
       raise "Only DE allowed here" unless obj.is_a? DE
@@ -795,7 +830,7 @@ module EDI
   # a numeric value. Other objects are conceivable, as long as they
   # maintain a reasonable +to_s+ for their representation.
   #
-  # The external representation of the (abstract) value may further depend on 
+  # The external representation of the (abstract) value may further depend on
   # rules of the unterlying EDI standard. E.g., UN/EDIFACT comes with a set
   # of reserved characters and an escaping mechanism.
 
@@ -827,7 +862,7 @@ module EDI
       end.join(', ') + "\n"
     end
 
-  
+
     # Performs various validation checks and returns the number of
     # issues found (plus the value of +err_count+):
     #
@@ -873,23 +908,23 @@ module EDI
             # Decimal char does not go into length count:
             len -= 1 if not md[3].nil?
             # len -= 1 if (md[1]=='-' and md[3]) || (md[1] != '' and not md[3])
-            break if not required? and len == 0
-            if len > _size.to_i
-#            if _upto.nil? and len != _size.to_i or len > _size.to_i
-              warn "Context in #{location}: #{_a_n_an}, #{_upto}, #{_size}; #{md[1]}, #{md[2]}, #{md[3]}"
-              warn "Length # mismatch in #{location}: #{len} vs. #{_size}"
-              err_count += 1
-              #            warn "  (strval was: '#{strval}')"
+            unless !required? && len == 0
+              if len > _size.to_i
+                #            if _upto.nil? and len != _size.to_i or len > _size.to_i
+                warn "Context in #{location}: #{_a_n_an}, #{_upto}, #{_size}; #{md[1]}, #{md[2]}, #{md[3]}"
+                warn "Length # mismatch in #{location}: #{len} vs. #{_size}"
+                err_count += 1
+                #            warn "  (strval was: '#{strval}')"
+              end
+              if md[1] =~/^0+/
+                warn "#{strval} contains leading zeroes"
+                err_count += 1
+              end
+              if md[3] and md[3]=~ /.0+$/
+                warn "#{strval} contains trailing decimal sign/zeroes"
+                err_count += 1
+              end
             end
-            if md[1] =~/^0+/
-              warn "#{strval} contains leading zeroes"
-              err_count += 1
-            end
-            if md[3] and md[3]=~ /.0+$/
-              warn "#{strval} contains trailing decimal sign/zeroes"
-              err_count += 1
-            end
-
           when 'a', 'an'
 #            len = value.is_a?(Numeric) ? value.to_s.length : value.length
             len = value.to_s.length
@@ -911,7 +946,7 @@ module EDI
     end
 
 
-    # Returns +true+ if value is not +nil+. 
+    # Returns +true+ if value is not +nil+.
     # Note that assigning an empty string to a DE makes it "not empty".
     def empty?
       @value == nil
