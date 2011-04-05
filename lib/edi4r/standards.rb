@@ -1,4 +1,4 @@
-# Classes providing access to directories of EDI standards like
+# classes providing access to directories of EDI standards like
 # the UN Trade Data Interchange Directories (UNTDID) and Subsets,
 # or ISO7389, or SAP IDoc definitions.
 #
@@ -58,7 +58,7 @@ module EDI
     #
     # A simplified Array to represent objects of EDI classes CDE, Segment, and
     # Message (branches) as lists of their constituting sub-units, augmented
-    # by the common properties +name+ and +desc+ (description). 
+    # by the common properties +name+ and +desc+ (description).
     #
     class Named_list
       attr_accessor :name, :desc
@@ -128,7 +128,7 @@ module EDI
       end
 
 
-      # Creates (and caches) a new directory. Returns reference to 
+      # Creates (and caches) a new directory. Returns reference to
       # existing directory when already in cache.
       #
       # std:: The syntax standard key. Currently supported:
@@ -155,7 +155,7 @@ module EDI
 
         case std
         when 'E' # UN/EDIFACT
-          par = {:d0051 => '', 
+          par = {:d0051 => '',
                  :d0057 => '',
                  :is_iedi => false }.update( params )
         when 'I' # SAP IDocs
@@ -198,11 +198,11 @@ module EDI
               else
                 prefix += 'ED'
                 ext = par[:EXTENSION] + '.csv'
-              end              
+              end
             else
               prefix += 'ED'
               ext = '.csv'
-            end              
+            end
           else
             case par[:SAPTYPE]
             when '40'; ext = '04000'
@@ -213,7 +213,7 @@ module EDI
           end
 
         when 'E' # UN/EDIFACT
-          prefix = '/edifact' 
+          prefix = '/edifact'
           if par[:d0002] # ISO9735 requested?
             case par[:d0002]
             when 1
@@ -247,7 +247,7 @@ module EDI
 
       #
       # Helper method: Determine path of requested csv file
-      # 
+      #
       # Will be generalized to a lookup scheme!
       #
       def Directory.path_finder( prefix, ext, selector )
@@ -277,7 +277,7 @@ module EDI
           d = DE_Properties.new
           d.name, d.format, d.dummy, d.description = line.strip.split(/;/)
           $stderr.puts "ERR DE line", line if d.description.nil?
-          @de_dir[d.name] = d 
+          @de_dir[d.name] = d
         end
 
         # Build CDE directory
@@ -311,10 +311,10 @@ module EDI
         end
 
         # Build Message directory
-        
+
         csvFileName = Directory.path_finder(prefix, ext, 'MD' )
         @msg_dir = Hash.new
-        re = if par[:d0065] and par[:d0065] =~ /([A-Z]{6})/ 
+        re = if par[:d0065] and par[:d0065] =~ /([A-Z]{6})/
              then Regexp.new($1) else nil end
         IO.foreach(csvFileName) do |line|
           next if re and line !~ re # Only lines matching message type if given
@@ -396,7 +396,7 @@ module EDI
       # Iterates over each branch (message), composite, data element,
       # or segment found (hence: BCDS) that is matched by +id+.
       #
-      # +id+ is a string. The object type requested by this string is not 
+      # +id+ is a string. The object type requested by this string is not
       # obvious. This method determines it through a naming convention.
       # See source for details.
       #
@@ -407,17 +407,17 @@ module EDI
         case id
         when /^[CES]\d{3}$/	# C)omposite
           list = cde(id)
-          
+
         when /^\d{4}$/		# Simple D)E
           list = de(id)
 
-        when /^[A-Z]{3}$/	# S)egment
+        when /^[A-Z][A-Z0-9]{2}$/	# S)egment
           list = segment(id)
 
         when /^[A-Z]{6}:$/	# Message B)ranch
           list = message(id)
 
-          # Workaround for the IDoc case: 
+          # Workaround for the IDoc case:
           # We identify entry type by a (intermediate) prefix
           #
         when /^d(.*)$/		# Simple D)E
@@ -457,14 +457,14 @@ if __FILE__ == $0
   require 'pathname'
 
   # Make this file standalone during testing:
-  ENV['EDI_NDB_PATH'] = 
+  ENV['EDI_NDB_PATH'] =
     Pathname.new(__FILE__).parent.parent.parent.to_s+'/data'
 
   # EDIFACT tests
 
   d = EDI::Dir::Directory.create('E',
-                                 :d0065 => 'ORDERS', 
-                                 :d0052 =>'D', 
+                                 :d0065 => 'ORDERS',
+                                 :d0052 =>'D',
                                  :d0054 =>'96A')
   i = EDI::Dir::Directory.create('E', :d0002 => 2)
 
@@ -476,19 +476,19 @@ if __FILE__ == $0
   # EDIFACT bulk tests
 
   d = EDI::Dir::Directory.create('E',
-                                 :d0052 =>'D', 
+                                 :d0052 =>'D',
                                  :d0054 =>'96A')
 
   puts d.message_names; gets
 
   # SAP IDOC tests (should fail now!)
 
-  s = EDI::Dir::Directory.create('I', 
-                                 :SAPTYPE => '40', 
+  s = EDI::Dir::Directory.create('I',
+                                 :SAPTYPE => '40',
                                  :IDOCTYPE => 'ORDERS04')
   t = EDI::Dir::Directory.create('I',
-                                 :SAPTYPE => '40', 
-                                 :IDOCTYPE => 'ORDERS05', 
+                                 :SAPTYPE => '40',
+                                 :IDOCTYPE => 'ORDERS05',
                                  :EXTENSION => '/GIL/EPG_ORDERS05')
   puts s.de_names
   puts t.de_names

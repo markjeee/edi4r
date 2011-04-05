@@ -457,7 +457,7 @@ module EDI::E
         @header.cS001.d0001 = par[:charset]
         @header.cS001.d0002 = par[:version]
         @header.cS002.d0004 = par[:sender] unless par[:sender].nil?
-        @header.cS003.d0010 = par[:recipient] unless par[:recip].nil?
+        @header.cS003.d0010 = par[:recipient] unless par[:recipient].nil?
         @header.d0020 = par[:interchange_control_reference]
 
         x= :application_reference;    @header.d0026 = par[x] unless par[x].nil?
