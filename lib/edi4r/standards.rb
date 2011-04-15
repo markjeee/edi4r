@@ -234,7 +234,7 @@ module EDI
 
           else		# UN/TDID requested?
             prefix += par[:is_iedi] ? '/untdid/ID' : '/untdid/ED'
-            ext = (par[:d0052]+par[:d0054]).downcase + '.csv'
+            ext = (par[:d0052].to_s+par[:d0054].to_s).downcase + '.csv'
           end
 
         else
