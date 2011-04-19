@@ -157,6 +157,7 @@ module EDI::E
 
     def Time.edifact(str, fmt=102)
       msg = "Time.edifact: #{str} does not match format #{fmt}"
+
       case fmt.to_s
       when '101'
         rc = str =~ /(\d\d)(\d\d)(\d\d)(.+)?/
@@ -187,10 +188,23 @@ module EDI::E
         raise msg unless rc and rc==0; warn msg if $7
         dtm = Time.local($1, $2, $3, $4, $5, $6)
 
+      when '402'
+        rc = str =~ /(\d\d)(\d\d)(\d\d)(.+)?/
+        raise msg unless rc and rc==0; warn msg if $4
+        dtm = Time.local(0, 1, 1, $1, $2, $3)
+
+      when '807'
+        rc = str =~ /(\d\d)(\d\d)(\d\d)(.+)?/
+        raise msg unless rc and rc==0; warn msg if $4
+        dtm = $3.to_i
+
       else
         raise "Time.edifact: Format #{fmt} not supported - sorry"
       end
-      dtm.format = fmt.to_s
+
+      # only do this if it supports custom format
+      dtm.format = fmt.to_s if dtm.respond_to?(:format)
+
       dtm
     end
 
@@ -209,9 +223,12 @@ module EDI::E
         "%04d%02d%02d%02d%02d" % [year, mon, day, hour, min]
       when '204'
         "%04d%02d%02d%02d%02d%2d" % [year, mon, day, hour, min, sec]
+      when '402'
+        "%02d%02d%02d" % [ hour, min, sec ]
+      when '807'
+        "%02d" % [ sec ]
       else # Should never occur
-        raise "Time.edifact: Format #{format
-} not supported - sorry"
+        raise "Time.edifact: Format #{format} not supported - sorry"
       end
     end
   end
