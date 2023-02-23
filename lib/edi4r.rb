@@ -1,3 +1,19 @@
+# -*- encoding: iso-8859-1 -*-
+
+require 'enumerator'
+require 'logger'
+
+BEGIN {
+  require 'pathname'
+# 'realpath' fails on Windows platforms!
+# ENV['EDI_NDB_PATH'] = Pathname.new(__FILE__).dirname.parent.realpath + 'data'
+  pdir = Pathname.new(__FILE__).dirname.parent
+  ENV['EDI_NDB_PATH'] =  File.expand_path(pdir) + File::Separator + 'data'
+}
+
+require "edi4r/standards"
+require "edi4r/diagrams"
+
 =begin rdoc
 :main:README
 :title:edi4r
@@ -8,7 +24,7 @@ An API to parse and create UN/EDIFACT and other EDI data
 * Abstract classes are maintained in this file.
 * See other files in edi4r/ for specific EDI syntax standards.
 
-$Id: edi4r.rb,v 1.6 2006/08/01 11:12:39 werntges Exp $
+$Id: edi4r.rb,v 1.6 2006/08/01 11:12:39 werntges Exp werntges $
 
 :include: ../AuthorCopyright
 
@@ -99,21 +115,11 @@ Collection_S::  Segment, CDE
 #   NDB		- support codelists
 #   (much more, including general cleanup & tuning ...)
 
-require 'enumerator'
-
-BEGIN {
-  require 'pathname'
-# 'realpath' fails on Windows platforms!
-# ENV['EDI_NDB_PATH'] = Pathname.new(__FILE__).dirname.parent.realpath + 'data'
-  pdir = Pathname.new(__FILE__).dirname.parent
-  ENV['EDI_NDB_PATH'] =  File.expand_path(pdir) + File::Separator + 'data'
-}
-
-require "edi4r/standards"
-require "edi4r/diagrams"
-
-
 module EDI
+
+  @logger = Logger.new(STDERR) # Default logger
+  attr_accessor :logger
+  module_function :logger, :logger=
 
   #########################################################################
   #
@@ -139,6 +145,34 @@ module EDI
 
   #########################################################################
   #
+  # Here we extend class Time by some methods that help us maximize
+  # its use in some contexts like UN/EDIFACT.
+  #
+  # Basic idea (UN/EDIFACT example): 
+  # * Use the EDIFACT qualifiers of DE 2379 in DTM directly
+  #   to parse dates and to create them upon output.
+  # * Use augmented Time objects as values of DE 2380 instead of strings
+  #
+
+  class EDI::Time < ::Time
+    attr_accessor :format
+    @@to_s_callbacks = []
+
+    alias to_s_orig to_s
+
+    def to_s
+      return to_s_orig unless @format
+      str = nil
+      @@to_s_callbacks.each do |sym|
+	return str if (str=self.send(sym)) # Found if not nil
+      end
+      raise "EDI::Time: Format '#{format}' not supported" 
+    end
+  end
+
+
+  #########################################################################
+  #
   # A simple utility class that fills a need not covered by "zlib".
   #
   # It is stripped to the essentials needed here internally.
@@ -156,6 +190,10 @@ module EDI
 
     def read( len=0 )
       len==0 ? @pipe.read : @pipe.read( len )
+    end
+
+    def getc
+      @pipe.getc # @pipe.read( 1 )
     end
 
     def rewind
@@ -188,6 +226,16 @@ module EDI
       each {|obj| obj.root = rt }
     end
 
+    # TO-DO: Experimental add-on
+    # Inefficient, brute-force implementation - use sparingly
+    def deep_clone
+       Marshal.restore(Marshal.dump(self)) # TO DO: Make more efficient
+#      c = Marshal.restore(Marshal.dump(self)) # TO DO: Make more efficient
+#      c.each {|obj| obj.parent = c }
+#      c.root = c if c.is_a? EDI::Interchange
+#      c
+    end
+
 
     # Similar to Array#push(), but automatically setting obj's
     # parent and root to self and self's root. Returns obj.
@@ -209,6 +257,7 @@ module EDI
     #   index, each, find_all, length, size, first, last
     def index(obj);   @a.index(obj);   end
     def each(&b);     @a.each(&b);     end
+    def find(&b);     @a.find(&b);     end
     def find_all(&b); @a.find_all(&b); end
     def size;         @a.size;         end
     def length;       @a.length;       end
@@ -217,6 +266,7 @@ module EDI
 
     # The element reference operator [] supports two access modes:
     # Array-like:: Return indexed element when passing an integer
+    # By regexp::  Return array of element(s) whose name(s) match given regexp
     # By name::    Return array of element(s) whose name(s) match given string
     def [](i)
       lookup(i)
@@ -224,7 +274,7 @@ module EDI
 
 
     # This implementation of +inspect()+ is very verbose in that it
-    # inspects also all contained objects in a recursive manner.
+    # inspects all contained objects in a recursive manner.
     #
     # indent::  String offset to use for indentation / pretty-printing
     # symlist:: Array of getter names (passed as symbols) whose values are
@@ -234,9 +284,13 @@ module EDI
       headline = indent + self.name+': ' + symlist.map do |sym|
         "#{sym} = #{(s=send(sym)).nil? ? 'nil' : s.to_s}"
       end.join(', ') + "\n"
-      headline << @header.inspect(indent+'  ') if @header
-      s = @a.inject( headline ){|s,obj| s << obj.inspect(indent+'  ')}
-      @trailer ? s << @trailer.inspect(indent+'  ') : s
+      if self.is_a? Collection_HT
+        headline << @header.inspect(indent+'  ') if @header
+        str = @a.inject( headline ){|s,obj| s << obj.inspect(indent+'  ')}
+        @trailer ? str << @trailer.inspect(indent+'  ') : str
+      else
+        @a.inject( headline ){|s,obj| s << obj.inspect(indent+'  ')}
+      end
     end
 
 
@@ -277,6 +331,8 @@ module EDI
     def lookup(i)
       if i.is_a?(Integer)
         @a[i]
+      elsif i.is_a?(Regexp)
+        @a.find_all {|x| x.name =~ i}
       else
         @a.find_all {|x| x.name == i}
       end
@@ -288,10 +344,14 @@ module EDI
     #
     # UN/EDIFACT examples:
     #  d3055, d1004=(value), cC105, a7174[1].value
+    #
+    # ANSI X.12 examples:
+    #  d305 = "C" # in segment BPR
+    #  r01  = "C" # equivalent expression, 01 indicating the first DE
 
     def method_missing(sym, *par)
-      if sym.id2name =~ /^([acds])(\w+)(=)?/
-        rc = lookup($2)
+      if sym.id2name =~ /^([acdrs])(\w+)(=)?/
+        rc = $1=='r' ? lookup($2.to_i - 1) : lookup($2)
         if rc.is_a? Array
           if rc.size==1
             rc = rc.first
@@ -302,12 +362,12 @@ module EDI
         if $3
           # Setter
           raise TypeError, "Can't assign to array #$2" if rc.is_a? Array
-          raise TypeError, "Can only assign to a DE value" if $1 != 'd'
+          raise TypeError, "Can only assign to a DE value" unless rc.respond_to?(:value) # if $1 != 'd'
           rc.value = par[0]
         else
           # Getter
-          return rc.value if rc.is_a? DE and $1 == 'd'
-          return rc if rc.is_a? CDE      and $1 == 'c'
+          return rc.value if rc.is_a? DE and ($1 == 'd' || $1 == 'r')
+          return rc if rc.is_a? CDE      and ($1 == 'c' || $1 == 'r')
           return rc if rc.is_a? Segment  and $1 == 's'
           err_msg =  "Method prefix '#$1' not matching result '#{rc.class}'!"
           raise TypeError, err_msg unless rc.is_a? Array
@@ -356,7 +416,7 @@ module EDI
 
 
     def to_s( postfix='' )
-      s = @header ? @header.to_s+postfix : ''
+      s = @header ? @header.to_s + postfix : ''
       each {|obj| s << (obj.is_a?(Segment) ? obj.to_s+postfix : obj.to_s)}
       s << @trailer.to_s+postfix if @trailer
       s
@@ -383,12 +443,12 @@ module EDI
       location = "#{parent.name} - #{@name}"
       if empty?
         if required?
-          warn "#{location}: Empty though mandatory!"
+          EDI::logger.warn "#{location}: Empty though mandatory!"
           err_count += 1
         end
       else
         if rep && maxrep && rep > maxrep
-          warn "#{location}: Too often repeated: #{rep} > #{maxrep}!"
+          EDI::logger.warn "#{location}: Too often repeated: #{rep} > #{maxrep}!"
           err_count += 1
         end
         each {|obj| err_count += obj.validate}
@@ -439,14 +499,16 @@ module EDI
   class Interchange < Collection_HT
 
     attr_accessor :output_mode
-    attr_reader :syntax, :version, :output_mode, :illegal_charset_pattern
+    attr_reader :syntax, :version
+    attr_reader :illegal_charset_pattern
 
     # Abstract class - don't instantiate directly
     #
     def initialize( user_par=nil )
       super( nil, self, 'Interchange' )
       @illegal_charset_pattern = /^$/ # Default: Never match a non-empty string
-      @content = nil # nil if empty, :messages, or :groups
+      @content = nil # nil if empty, else :messages, or :groups
+      EDI::logger = user_par[:logger] if user_par[:logger].is_a? Logger
     end
 
     # Auto-detect file content, optionally decompress, return an 
@@ -465,12 +527,16 @@ module EDI
 
     def Interchange.parse( hnd, auto_validate=true )
       case rc=Interchange.detect( hnd )
-      when 'BZ': Interchange.parse( EDI::Bzip2Reader.new( hnd ) ) # see "peek"
-      when 'GZ': Interchange.parse( Zlib::GzipReader.new( hnd ) )
-      when 'E':  EDI::E::Interchange.parse( hnd, auto_validate )
-      when 'I':  EDI::I::Interchange.parse( hnd, auto_validate )
-      when 'XE': EDI::E::Interchange.parse_xml( REXML::Document.new(hnd) )
-      when 'XI': EDI::I::Interchange.parse_xml( REXML::Document.new(hnd) )
+      when 'BZ' then Interchange.parse( EDI::Bzip2Reader.new( hnd ) ) # see "peek"
+      when 'GZ' then Interchange.parse( Zlib::GzipReader.new( hnd ) )
+      when 'A'  then EDI::A::Interchange.parse( hnd, auto_validate )
+      when 'E'  then EDI::E::Interchange.parse( hnd, auto_validate )
+      when 'I'  then EDI::I::Interchange.parse( hnd, auto_validate )
+      when 'S'  then EDI::S::Interchange.parse( hnd, auto_validate )
+      when 'XA' then EDI::A::Interchange.parse_xml( REXML::Document.new(hnd) )
+      when 'XE' then EDI::E::Interchange.parse_xml( REXML::Document.new(hnd) )
+      when 'XI' then EDI::I::Interchange.parse_xml( REXML::Document.new(hnd) )
+      when 'XS' then EDI::S::Interchange.parse_xml( REXML::Document.new(hnd) )
       else raise "#{rc}: Unsupported format key - don\'t know how to proceed!"
       end
     end
@@ -484,18 +550,22 @@ module EDI
     #
     # NOTES: See Interchange.parse
 
-    def Interchange.peek( hnd=$stdin)
+    def Interchange.peek( hnd=$stdin, params={})
       case rc=Interchange.detect( hnd )
         # Does not exist yet!
 #      when 'BZ': Interchange.peek( Zlib::Bzip2Reader.new( hnd ) )
         # Temporary substitute, Unix/Linux only, low performance:
-      when 'BZ': Interchange.peek( EDI::Bzip2Reader.new( hnd ) )
+      when 'BZ' then Interchange.peek( EDI::Bzip2Reader.new( hnd ), params )
 
-      when 'GZ': Interchange.peek( Zlib::GzipReader.new( hnd ) )
-      when 'E':  EDI::E::Interchange.peek( hnd )
-      when 'I':  EDI::I::Interchange.peek( hnd )
-      when 'XE': EDI::E::Interchange.peek_xml( REXML::Document.new(hnd) )
-      when 'XI': EDI::I::Interchange.peek_xml( REXML::Document.new(hnd) )
+      when 'GZ' then Interchange.peek( Zlib::GzipReader.new( hnd ), params )
+      when 'A'  then EDI::A::Interchange.peek( hnd, params )
+      when 'E'  then EDI::E::Interchange.peek( hnd, params )
+      when 'I'  then EDI::I::Interchange.peek( hnd )
+      when 'S'  then EDI::S::Interchange.peek( hnd )
+      when 'XA' then EDI::A::Interchange.peek_xml( REXML::Document.new(hnd) )
+      when 'XE' then EDI::E::Interchange.peek_xml( REXML::Document.new(hnd) )
+      when 'XI' then EDI::I::Interchange.peek_xml( REXML::Document.new(hnd) )
+      when 'XS' then EDI::S::Interchange.peek_xml( REXML::Document.new(hnd) )
       else raise "#{rc}: Unsupported format key - don\'t know how to proceed!"
       end
     end
@@ -511,17 +581,19 @@ module EDI
       # If you really need to read from $stdin, call Interchange::E::parse()
       # and Interchange::E::peek() etc. directly to bypass auto-detection
       hnd.rewind
-
+      
       re  = /(<\?xml.*?)?DOCTYPE\s+Interchange.*?\<Interchange\s+.*?standard\_key\s*=\s*(['"])(.)\2/m
       case buf
-      when /^(UNA......)?\r?\n?U[IN]B.UNO[A-Z].[1-4]/: 'E'  # UN/EDIFACT
-      when /^EDI_DC/: 'I'  # SAP IDoc
-      when re : 'X'+$3     # XML, Doctype = Interchange, syntax standard key (E, I, ...) postfix
-      when /^\037\213/: 'GZ' # gzip
-      when /^\037\235/: 'Z'  # compress
-      when /^\037\036/: 'z'  # pack
-      when /^BZh[0-\377]/:  'BZ' # bzip2
-      else; "?? (stream starts with: #{buf[0..15]})"
+      when /^(UNA......)?\r?\n?U[IN]B.UNO[A-Z].[1-4]/ then 'E'  # UN/EDIFACT
+      when /^ISA.{67}\d{6}.\d{4}/ then 'A'  # ANSI X.12
+      when /^EDI_DC/ then 'I'  # SAP IDoc
+      when /^00/ then 'S'      # SEDAS
+      when re then 'X'+$3      # XML, Doctype = Interchange, syntax standard key (E, I, ...) postfix
+      when /^\037\213/ then 'GZ' # gzip
+      when /^\037\235/ then 'Z'  # compress
+      when /^\037\036/ then 'z'  # pack
+      when /^BZh[0-\377]/ then  'BZ' # bzip2
+      else raise "?? (stream starts with: #{buf[0..15]})"
       end
     end
 
@@ -758,6 +830,7 @@ module EDI
       loop do
         index += 1
         seg = msg[index]
+	break if seg.nil?
         next  if child_mode and seg.level > level+1 # other descendants
         break if seg.level <= level
         results << seg
@@ -805,8 +878,11 @@ module EDI
 
     def initialize( p, name, status, fmt )
       @parent, @root, @name, @format, @status = p, p.root, name, fmt, status
-      raise "#{location}: 'nil' is not an allowed format." if fmt.nil?
-      raise "#{location}: 'nil' is not an allowed status." if status.nil?
+      if fmt.nil? || status.nil?
+        location = "DE #{parent.name}/#{@name}"
+        raise "#{location}: 'nil' is not an allowed format." if fmt.nil?
+        raise "#{location}: 'nil' is not an allowed status." if status.nil?
+      end
       @value = nil
     end
 
@@ -816,6 +892,7 @@ module EDI
       return str if str.is_a? String
       str = str.to_s; len = str.length
       return str unless format =~ /n(\d+)/ && len != (fixlen=$1.to_i)
+      location = "DE #{parent.name}/#{@name}"
       raise "#{location}: Too long (#{l}) for fmt #{format}" if len > fixlen
       '0' * (fixlen - len) + str
     end
@@ -835,11 +912,11 @@ module EDI
     # - character set limitations violated?
     # - various format restrictions violated?
 
-    def validate( err_count=0 )
+    def validate( err_count=0, fmt=@format )
       location = "DE #{parent.name}/#{@name}"
       if empty?
         if required?
-          warn "#{location}: Empty though mandatory!"
+          EDI::logger.warn "#{location}: Empty though mandatory!"
           err_count += 1
         end
       else
@@ -847,13 +924,13 @@ module EDI
         # Charset check
         #
         if (pos = (value =~ root.illegal_charset_pattern))# != nil
-          warn "#{location}: Illegal character: #{value[pos].chr}"
+          EDI::logger.warn "#{location}: Illegal character: #{value[pos].chr} (#{value[pos]})"
           err_count += 1
         end
         #
         # Format check, raise error if not consistent!
         #
-        if @format =~ /^(a|n|an)(..)?(\d+)$/
+        if fmt =~ /^(a|n|an)(..)?(\d+)$/
           _a_n_an, _upto, _size = $1, $2, $3
           case _a_n_an
 
@@ -862,8 +939,8 @@ module EDI
             re = Regexp.new('^(-)?(\d+)([.,]\d+)?$')
             md = re.match strval
             if md.nil?
-              raise "#{location}: '#{strval}' - not matching format #@format"
-#              warn "#{strval} - not matching format #@format"
+              raise "#{location}: '#{strval}' - not matching format #{fmt}"
+              #              warn "#{strval} - not matching format #{fmt}"
 #              err_count += 1
             end
 
@@ -873,28 +950,31 @@ module EDI
             # Decimal char does not go into length count:
             len -= 1 if not md[3].nil?
             # len -= 1 if (md[1]=='-' and md[3]) || (md[1] != '' and not md[3])
-            break if not required? and len == 0
+
+            # break if not required? and len == 0
+           if required? or len != 0
             if len > _size.to_i
 #            if _upto.nil? and len != _size.to_i or len > _size.to_i
-              warn "Context in #{location}: #{_a_n_an}, #{_upto}, #{_size}; #{md[1]}, #{md[2]}, #{md[3]}"
-              warn "Length # mismatch in #{location}: #{len} vs. #{_size}"
+              EDI::logger.warn "Context in #{location}: #{_a_n_an}, #{_upto}, #{_size}; #{md[1]}, #{md[2]}, #{md[3]}"
+              EDI::logger.warn "Length # mismatch in #{location}: #{len} vs. #{_size}"
               err_count += 1
               #            warn "  (strval was: '#{strval}')"
             end
             if md[1] =~/^0+/
-              warn "#{strval} contains leading zeroes"
+              EDI::logger.warn "#{strval} contains leading zeroes"
               err_count += 1
             end
             if md[3] and md[3]=~ /.0+$/
-              warn "#{strval} contains trailing decimal sign/zeroes"
+              EDI::logger.warn "#{strval} contains trailing decimal sign/zeroes"
               err_count += 1
             end
+           end
 
           when 'a', 'an'
 #            len = value.is_a?(Numeric) ? value.to_s.length : value.length
             len = value.to_s.length
             if _upto.nil? and len != $3.to_i or len > $3.to_i
-              warn "Length mismatch in #{location}: #{len} vs. #{_size}"
+              EDI::logger.warn "Length mismatch in #{location}: #{len} vs. #{_size}"
               err_count += 1
             end
           else
@@ -903,7 +983,7 @@ module EDI
           end
 
         else
-          warn "#{location}: Illegal format: #{@format}!"
+          EDI::logger.warn "#{location}: Illegal format: #{fmt}!"
           err_count += 1
         end
       end

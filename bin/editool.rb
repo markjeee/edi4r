@@ -1,14 +1,13 @@
 #!/usr/bin/env ruby
+# -*- encoding: ISO-8859-1 -*-
 #
 # Tool to validate, list and analyze EDI data, based on EDI4R
 #
-# $Id: editool.rb,v 1.3 2006/08/01 11:19:41 werntges Exp $
-#
-# Author:  Heinz W. Werntges (edi@informatik.fh-wiesbaden.de)
+# Author:  Heinz W. Werntges (edi@cs.hs-rm.de)
 #
 # License: This code is put under the Ruby license
 #
-# Copyright (c) 2006 Heinz W. Werntges, FH Wiesbaden
+# Copyright (c) 2006, 2011 Heinz W. Werntges, RheinMain University of Applied Sciences, Wiesbaden
 #
 
 if $DEBUG  # Include statement during test setup:
@@ -16,7 +15,7 @@ if $DEBUG  # Include statement during test setup:
   require 'edi4r'
   require 'edi4r/edifact'
   require "edi4r/rexml"
-  require_gem "edi4r-tdid"
+  require "edi4r-tdid"
 else       # Regular include statements:
   require "rubygems"
   require "edi4r"
@@ -25,6 +24,7 @@ else       # Regular include statements:
   rescue LoadError # Ignore error
   end
   require "edi4r/edifact"
+  require "edi4r/ansi_x12"
   require "edi4r/rexml"
   require "edi4r-tdid"
 end
@@ -61,6 +61,10 @@ def report_peek_result( ic_stub, fname )
              else
                [fname, h.cS002.d0004, h.cS003.d0010, h.d0020, h.d0035==1]
              end
+    puts "%15.15s\t%13s\t%13s\t%14s\t%s" % params
+
+  when 'A'
+    params = [fname, h.dI06, h.dI07, h.dI12, h.dI14=='T']
     puts "%15.15s\t%13s\t%13s\t%14s\t%s" % params
 
   when 'I'

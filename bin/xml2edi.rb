@@ -1,17 +1,11 @@
 #!/usr/bin/env ruby
-
-# $Id: xml2edi.rb,v 1.1 2006/08/01 11:20:56 werntges Exp $
-
-# $Log: xml2edi.rb,v $
-# Revision 1.1  2006/08/01 11:20:56  werntges
-# Initial revision
+# -*- encoding: ISO-8859-1 -*-
 #
-#
-# Author:  Heinz W. Werntges (edi@informatik.fh-wiesbaden.de)
+# Author:  Heinz W. Werntges (edi@cs.hs-rm.de)
 #
 # License: This code is put under the Ruby license
 #
-# Copyright (c) 2006 Heinz W. Werntges, FH Wiesbaden
+# Copyright (c) 2006, 2011 Heinz W. Werntges, RheinMain University of Applied Sciences, Wiesbaden
 #
 
 # SYNOPSIS:
@@ -23,14 +17,15 @@
 #
 # DESCRIPTION:
 #
-# This script turns XML files into EDI (EDIFACT or SAP IDOC) documents.
+# This script turns XML files into EDI (EDIFACT or ANSI X12 or SAP IDOC) documents.
 # 
 
 require "rubygems"
-require_gem "edi4r"
-require_gem "edi4r-tdid"
+require "edi4r"
+require "edi4r-tdid"
 # require_gem "edi4r-idoc"
 require "edi4r/edifact"
+require "edi4r/ansi_x12"
 require "edi4r/rexml"
 
 def to_edi( xdoc )

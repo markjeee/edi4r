@@ -3,9 +3,10 @@
 This is Ruby gem <b>edi4r</b> version 
 :include:VERSION
 
-Edi4r was created to greatly simplify the creation and processing of data for
-Electronic Data Interchange (EDI). In particular, it supports the UN/EDIFACT
-syntax (ISO 9573) and optionally SAP IDocs.
+Edi4r was created to greatly simplify the creation and processing of data 
+for Electronic Data Interchange (EDI). In particular, it supports the
+UN/EDIFACT syntax (ISO 9573) and optionally SAP IDocs. 
+Limited support is offered for ANSI X.12 and SEDAS.
  
 == Installation
 
@@ -13,10 +14,14 @@ Install it as any other Ruby gem, e.g.:
 
   sudo gem install edi4r-<version>.gem
 
+With administrator privileges and network access, just type:
+
+  gem install edi4r
+
+
 == Usage
 
-  require 'rubygems'
-  require_gem 'edi4r'
+  require 'edi4r'         # Older installations: require_gem 'edi4r'
   require 'edi4r/edifact' # optional
 
   # Build a UN/EDIFACT interchange from its character representation in a file:
@@ -49,15 +54,15 @@ Install it as any other Ruby gem, e.g.:
 
 == See also
 
-* Background[link:files/lib/edi4r_rb.html] info about data structure and classes. 
+* Background[link:EDI.html] info about data structure and classes. 
 
-* A Tutorial[link:files/Tutorial.html] for examples of use.
+* A Tutorial[link:Tutorial.html] for examples of use.
 
-* A ChangeLog[link:files/ChangeLog.html] will be maintained; it is just starting now.
+* A Changelog[link:Changelog.html] is maintained since version 0.8
 
-* Finally, see TO-DO[link:files/TO-DO.html] for the current wish list.
+* Finally, see TO-DO[link:TO-DO.html] for the current wish list.
 
-* This code is put under the Ruby license, see COPYING[link:files/COPYING.html] for details.
+* This code is put under the Ruby license, see COPYING[link:COPYING.html] for details.
 
 :include:AuthorCopyright
 

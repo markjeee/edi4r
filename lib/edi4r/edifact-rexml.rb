@@ -1,3 +1,4 @@
+# -*- encoding: iso-8859-1 -*-
 # UN/EDIFACT add-ons to EDI module,
 #   Methods for XML support for the UN/EDIFACT module
 #
@@ -36,12 +37,12 @@ module EDI::E
       _header  = _root.elements["Header"]
       _trailer = _root.elements["Trailer"]
       _una  = _header.elements["Parameter[@name='UNA']"]
-      _una = _una.text if _una
+      _una = _una.text.strip if _una
       raise "Empty UNA" if _una and _una.empty? # remove later!
       # S001: Works for both batch and interactive EDI:
       _s001 =  _header.elements["Segment/CDE[@name='S001']"]
       _version = _s001.elements["DE[@name='0002']"].text.to_i
-      _charset = _s001.elements["DE[@name='0001']"].text
+      _charset = _s001.elements["DE[@name='0001']"].text.strip
       params = { :charset => _charset, :version => _version }
       if _una
         params[:una_string] = _una
@@ -83,7 +84,7 @@ module EDI::E
       # S001: Works for both batch and interactive EDI:
       _s001 =  _header.elements["Segment/CDE[@name='S001']"]
       _version = _s001.elements["DE[@name='0002']"].text.to_i
-      _charset = _s001.elements["DE[@name='0001']"].text
+      _charset = _s001.elements["DE[@name='0001']"].text.strip
       params = { :charset => _charset, :version => _version }
       if _una
         params[:una_string] = _una

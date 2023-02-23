@@ -3,11 +3,13 @@
 
 # Load path magic...
 $:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
+$:.unshift File.join(File.dirname(__FILE__), '..', '..', 'tdid', 'lib')
 
 require 'test/unit'
 
 require 'edi4r'
 require 'edi4r/edifact'
+require 'edi4r-tdid'
 
 # require "rubygems"
 # require_gem "edi4r"
@@ -119,7 +121,7 @@ class Tutorial_Tests < Test::Unit::TestCase
     last_msg = ic.last
     d = last_msg['DTM']  # Array of all DTM segments, any segment group
     assert( d. is_a?( Array ) )
-    d = msg.find_all {|seg| seg.name == 'DTM' && seg.sg_name == 'SG4'}
+    d = last_msg.find_all {|seg| seg.name == 'DTM' && seg.sg_name == 'SG4'}
     assert_equal( 11, d.size )
 
     doc1 = last_msg['DOC'].first

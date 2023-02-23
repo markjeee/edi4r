@@ -1,0 +1,859 @@
+00:satzart;n2:1;M;Satzart-ID
+00:bbn_absender_dt;n7:3;M;bbn des Absenders der Datei
+00:bbn_empfaenger_dt;n7:10;M;bbn des Empfaengers der Datei
+00:datum_erstellung;n6:17;M;Maschinen-/Tagesdatum
+00:dateistatus;an1:23;M;blank=Original, K=Konditionsabgleich, T=Test
+00:frei1;an..11:24;C;Frei
+00:sedas1;an..25:35;C;SEDAS-intern
+00:datei_archiv_nr;an..8:60;M;Nummer zur Kennzeichnung und Identifizierung der Datei
+00:lfd_nr_dt_empfaenger;n..8:68;M;Fortlaufende Nummer der Datei pro Empfaenger
+00:frei2;an..11:76;C;Frei
+00:dateianzahl;n..10:87;M;Anzahl logischer Dateien, >0 in SA99
+00:frei3;an..29:97;C;Frei
+00:positions_nr;n..6:126;M;Positionsnummer des Satzes
+00:frei4;an..19:132;C;Frei
+01:satzart;n2:1;M;Satzart-ID
+01:bbn_absender;n7:3;M;bbn des Absenders
+01:bbn_empfaenger;n7:10;M;bbn des Empfaengers
+01:datum_erstellung;n6:17;M;Maschinen-/Tagesdatum
+01:abrechnung_von;n6:23;M;Abrechnungszeitraum von, JJMMTT
+01:abrechnung_bis;n6:29;M;Abrechnungszeitraum bis, JJMMTT
+01:sedas1;an..25:35;C;SEDAS-intern
+01:frei1;an..8:60;C;Frei
+01:log_nr;n..8:68;M;Laufende Nummer der log. Datei pro Austauschtermin (!) zwischen Datenlieferant und -empfaenger
+01:rel_nr;n2:76;M;Release-Nummer, 05 = ab 1.04.1993
+01:frei2;an..5:78;C;Frei
+01:waehrungs_kz;n..2:83;M;Waehrungs-Kennzeichen, 01=DM, 02=oeS
+01:verschluesselungs_kz;n1:85;M;Verschluesselungs-Kennzeichen, 0=unverschluesselt, 01=verschluesselt vom Absender
+01:sortier_kz;n1:86;M;Sortierfolge-Kennzeichen, 0=Standard, 1=unsortiert
+01:satzanzahl;n..10:87;C;Satzanzahl, Null in 01
+01:frei3;an..29:97;C;Frei
+01:positions_nr;n..6:126;M;Positionsnummer des Satzes
+01:frei4;an..19:132;C;Frei
+1200:satzart;n2:1;M;Satzart-ID
+1200:bbn_lieferant;n7:3;M;bbn des Lieferanten
+1200:bbn_rechnungsempfaenger;n7:10;M;bbn des Rechnungsempfaengers
+1200:beleg_kz;n1:17;M;Kennzeichen - 1 = Belegnummer
+1200:beleg_nr;n..7:18;M;Belegnummer
+1200:ls_auftrag_kz;n1:25;M;Kennzeichen Lieferschein/Auftrag
+1200:ls_auftrag_nr;an..7:26;M;Lieferschein-/Auftrags-Nummer
+1200:auftrags_nr_besteller;an..7:33;C;Auftragsnummer des Bestellers
+1200:lieferdatum;n6:40;M;Lieferdatum, JJMMTT
+1200:frei1;an..6:46;C;Frei
+1200:warenempfaenger_kz;n1:52;M;Kennzeichen Warenempfaenger - 1=bbs, 2=bbn/intern, 3=nur bbn
+1200:bbn_warenempfaenger;n7:53;M;bbn des Warenempfaengers
+1200:interne_nr;n..6:60;M;Interne Kunden/Filialnummer
+1200:s_rechnung_kz;n1:66;M;Kennzeichen Strecken/Summenrechnung
+1200:s_rechnung_nr;n..7:67;C;Strecken-/Summen-Rechnungsnummer
+1200:datum_s_beleg;n6:74;C;Datum des S.-Belegs
+1200:frei2;an1:80;C;Frei
+1200:datum_liefernachweis;n5:81;M;Datum des Liefernachweises, JMMTT
+1200:ls_auftrag_kz_1;n1:86;M;Kennzeichen Lieferschein/Auftrag
+1200:ls_auftrag_nr_1;n..7:87;C;Lieferschein-/Auftragsnummer 1
+1200:ls_auftrag_kz_2;n1:94;M;Kennzeichen Lieferschein/Auftrag
+1200:ls_auftrag_nr_2;n..7:95;C;Lieferschein-/Auftragsnummer 2
+1200:ls_auftrag_kz_3;n1:102;M;Kennzeichen Lieferschein/Auftrag
+1200:ls_auftrag_nr_3;n..7:103;C;Lieferschein-/Auftragsnummer 3
+1200:ls_auftrag_kz_4;n1:110;M;Kennzeichen Lieferschein/Auftrag
+1200:ls_auftrag_nr_4;n..7:111;C;Lieferschein-/Auftragsnummer 4
+1200:ls_auftrag_kz_5;n1:118;M;Kennzeichen Lieferschein/Auftrag
+1200:ls_auftrag_nr_5;n..7:119;C;Lieferschein-/Auftragsnummer 5
+1200:positions_nr;n..6:126;M;Positionsnummer des Satzes
+1200:b_vereinbarung_kz_1;n1:132;M;Kennzeichen Besondere Vereinbarungen 1
+1200:b_vereinbarung_1;n..8:133;M;Kennzeichen Besondere Vereinbarungen 1
+1200:b_vereinbarung_kz_2;n1:141;M;Kennzeichen Besondere Vereinbarungen 2
+1200:b_vereinbarung_2;n..5:142;M;Kennzeichen Besondere Vereinbarungen 2
+1200:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+1201:satzart;n2:1;M;Satzart-ID
+1201:frei1;an..22:3;C;Frei
+1201:bbn_rechnungsempfaenger;n13:25;C;bbn-13 des Rechnungsempfaengers
+1201:bbn_warenlieferant;n13:38;C;bbn oder bbn-13 des Warenlieferanten
+1201:ls_auftrag_kz;n1:51;M;Kennzeichen Lieferschein/Auftrag
+1201:ls_auftrag_nr_1;an..17:52;C;Lieferschein-/Auftragsnummer 1
+1201:ls_auftrag_nr_2;an..17:69;C;Lieferschein-/Auftragsnummer 2
+1201:ust_ident_nr_lieferant;an..14:86;C;Umsatzsteuer-Identnummer des Lieferanten
+1201:ust_ident_nr_erwerber;an..14:100;C;Umsatzsteuer-Identnummer des Erwerbers
+1201:frei2;an..12:114;C;Frei
+1201:positions_nr;n..6:126;M;Positionsnummer des Satzes
+1201:steuer_nr;an..15:132;M;Nummer des Steuerzahlers
+1201:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+1208:satzart;n2:1;M;Satzart-ID
+1208:bbn_lieferant;n7:3;M;bbn des Lieferanten
+1208:bbn_rechnungsempfaenger;n7:10;M;bbn des Rechnungsempfaengers
+1208:beleg_kz;n1:17;M;Kennzeichen - 1 = Belegnummer
+1208:beleg_nr;n..7:18;M;Belegnummer
+1208:freitext;an..101:25;M;Erlaeuterungen
+1208:positions_nr;n..6:126;M;Positionsnummer des Satzes
+1208:frei1;an..15:132;C;Frei
+1208:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+1300:satzart;n2:1;M;Satzart-ID
+1300:bbn_lieferant;n7:3;M;bbn des Lieferanten
+1300:bbn_rechnungsempfaenger;n7:10;M;bbn des Rechnungsempfaengers
+1300:beleg_kz;n1:17;M;Kennzeichen - 1 = Belegnummer
+1300:beleg_nr;n..7:18;M;Belegnummer
+1300:ean;n12:25;M;EAN/GTIN
+1300:mengenschluessel;n2:37;M;Gibt die Packungsart an
+1300:komma_kz_m;n1:39;M;Komma-Kennzeichen Menge: 1..5 = 0..4 Nachkommastellen, 0=leer
+1300:menge;n..7:40;M;Menge
+1300:preisschluessel;n2:47;M;Preisschluessel, 00/01/02/03/09
+1300:komma_kz_p;n1:49;M;Komma-Kennzeichen Preis
+1300:grundpreis;n..6:50;C;Grundpreis
+1300:frei1;an..2:56;C;Frei
+1300:artikelrabatt_gesamt;n..8:58;C;Addition aller auf den Artikel gewaehrten Rabatte
+1300:warenwert;n..9:66;C;Menge * Grundpreis - Gesamtrabatt
+1300:umsatzsteuer_kz;n1:75;M;USt-Kennzeichen
+1300:kondition;n1:76;C;Bilateral zu vereinbaren
+1300:frei2;an..4:77;C;Frei
+1300:datum_liefernachweis;n5:81;M;Datum Liefernachweis, JMMTT
+1300:rabatt_kz_1;n2:86;M;Rabatt-Kennzeichen, Nr. 10
+1300:artikelrabatt_1;n..8:88;C;Artikelrabatt 1
+1300:rabatt_kz_2;n2:96;M;Rabatt-Kennzeichen, Nr. 10
+1300:artikelrabatt_2;n..8:98;C;Artikelrabatt 2
+1300:rabatt_kz_3;n2:106;M;Rabatt-Kennzeichen, Nr. 10
+1300:artikelrabatt_3;n..8:108;C;Artikelrabatt 3
+1300:rabatt_kz_4;n2:116;M;Rabatt-Kennzeichen, Nr. 10
+1300:artikelrabatt_4;n..8:118;C;Artikelrabatt 4
+1300:positions_nr;n..6:126;M;Positionsnummer des Satzes
+1300:schluessel_kz;n2:132;M;Schluessel-Kennzeichen Besondere Vereinbarungen 1
+1300:komma_kz;n1:134;C;Definiert die Stellung des Dezimalkommas
+1300:sondereintrag;n..6:135;C;Sondereintrag Besondere Vereinbarungen 1
+1300:b_vereinbarung_kz_2;n1:141;M;Kennzeichen Besondere Vereinbarungen 2
+1300:b_vereinbarung_2;n..5:142;C;Kennzeichen Besondere Vereinbarungen 2
+1300:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+1302:satzart;n2:1;M;Satzart-ID
+1302:frei1;an..22:3;C;Frei
+1302:ust_prozentsatz;n..5:25;C;Umsatzsteuer, Prozentsatz - Format xx,yyy
+1302:preisschluessel;n2:30;M;1;Preisschluessel, Nr. 7
+1302:komma_kz_p;n1:32;M;Komma-Kennzeichen Preis
+1302:grundpreis;n..7:33;C;Grundpreis
+1302:mengenschluessel;n2:40;M;Gibt die Packungsart an
+1302:komma_kz_m;n1:42;M;Komma-Kennzeichen Menge: 1..5 = 0..4 Nachkommastellen, 0=leer
+1302:menge;n..10:43;C;Menge
+1302:frei2;an..73:53;C;Frei
+1302:positions_nr;n..6:126;M;Positionsnummer des Satzes
+1302:frei3;an..15:132;C;Frei
+1302:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+1308:satzart;n2:1;M;Satzart-ID
+1308:bbn_lieferant;n7:3;M;bbn des Lieferanten
+1308:bbn_rechnungsempfaenger;n7:10;M;bbn des Rechnungsempfaengers
+1308:beleg_kz;n1:17;M;Kennzeichen - 1 = Belegnummer
+1308:beleg_nr;n..7:18;M;Belegnummer
+1308:freitext;an..101:25;M;Erlaeuterungen
+1308:positions_nr;n..6:126;M;Positionsnummer des Satzes
+1308:frei1;an..15:132;C;Frei
+1308:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+1400:satzart;n2:1;M;Satzart-ID
+1400:bbn_lieferant;n7:3;M;bbn des Lieferanten
+1400:bbn_rechnungsempfaenger;n7:10;M;bbn des Rechnungsempfaengers
+1400:beleg_kz;n1:17;M;Kennzeichen - 1 = Belegnummer
+1400:beleg_nr;n..7:18;M;Belegnummer
+1400:ust_kz;n1:25;M;Umsatzsteuer-Kennzeichen, Nr. 1
+1400:warenwert_kz;n1:26;M;Warenwert-Kennzeichen, Nr. 11
+1400:komma_kz;n1:27;C;Definiert die Stellung des Dezimalkommas, Nr. 4
+1400:warenbetrag_menge;n..8:28;M;Warenbetrag oder Menge
+1400:frei1;an..2:36;C;Frei
+1400:nachweisrabatt_gesamt;n..8:38;C;Liefernachweisrabatt gesamt
+1400:fracht_verpackung_kz;n1:46;M;Fracht-/Verpackungs-Kennzeichen, Nr. 8
+1400:fracht_verpackung;n..7:47;C;Fracht/Verpackung/Versicherung
+1400:skonto;n..7:54;C;Skonto - Zwei Nachkommastellen!
+1400:nachweis_endbetrag;n..9:61;C;Liefernachweis-Endbetrag
+1400:frei2;an..11:70;C;Frei
+1400:datum_liefernachweis;n5:81;M;Datum Liefernachweis, JMMTT
+1400:rabatt_kz_1;n2:86;M;Rabatt-Kennzeichen, Nr. 10
+1400:nachweisrabatt_1;n..8:88;C;Liefernachweisrabatt 1
+1400:rabatt_kz_2;n2:96;M;Rabatt-Kennzeichen, Nr. 10
+1400:nachweisrabatt_2;n..8:98;C;Liefernachweisrabatt 2
+1400:rabatt_kz_3;n2:106;M;Rabatt-Kennzeichen, Nr. 10
+1400:nachweisrabatt_3;n..8:108;C;Liefernachweisrabatt 3
+1400:rabatt_kz_4;n2:116;M;Rabatt-Kennzeichen, Nr. 10
+1400:nachweisrabatt_4;n..8:118;C;Liefernachweisrabatt 4
+1400:positions_nr;n..6:126;M;Positionsnummer des Satzes
+1400:b_vereinbarung_kz_1;n1:132;M;Kennzeichen Besondere Vereinbarungen 1
+1400:b_vereinbarung_1;n..8:133;M;Kennzeichen Besondere Vereinbarungen 1
+1400:b_vereinbarung_kz_2;n1:141;M;Kennzeichen Besondere Vereinbarungen 2
+1400:b_vereinbarung_2;n..5:142;C;Kennzeichen Besondere Vereinbarungen 2
+1400:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+1408:satzart;n2:1;M;Satzart-ID
+1408:bbn_lieferant;n7:3;M;bbn des Lieferanten
+1408:bbn_rechnungsempfaenger;n7:10;M;bbn des Rechnungsempfaengers
+1408:beleg_kz;n1:17;M;Kennzeichen - 1 = Belegnummer
+1408:beleg_nr;n..7:18;M;Belegnummer
+1408:freitext;an..101:25;M;Erlaeuterungen
+1408:positions_nr;n..6:126;M;Positionsnummer des Satzes
+1408:frei1;an..15:132;C;Frei
+1408:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+1500:satzart;n2:1;M;Satzart-ID
+1500:bbn_lieferant;n7:3;M;bbn des Lieferanten
+1500:bbn_rechnungsempfaenger;n7:10;M;bbn des Rechnungsempfaengers
+1500:beleg_kz;n1:17;M;Kennzeichen - 1 = Belegnummer
+1500:beleg_nr;n..7:18;M;Belegnummer
+1500:ls_auftrag_kz;n1:25;M;Kennzeichen Lieferschein/Auftrag
+1500:ls_auftrag_nr;an..7:26;C;Lieferschein-/Auftrags-Nummer
+1500:auftrags_nr_besteller;an..7:33;C;Auftragsnummer des Bestellers
+1500:lieferdatum;n6:40;C;Lieferdatum, JJMMTT
+1500:valutadatum;n6:46;C;Valutadatum, JJMMDD
+1500:warenempfaenger_kz;n1:52;M;Kennzeichen Warenempfaenger - 1=bbs, 2=bbn/intern, 3=nur bbn
+1500:bbn_warenempfaenger;n7:53;M;bbn des Warenempfaengers
+1500:interne_nr;n..6:60;M;Interne Kunden/Filialnummer
+1500:reli_zahlungsempfaenger_kz;n1:66;M;Kennzeichen Rechnungsliste
+1500:rz_eintrag_1;n..7:67;M;Variabler Inhalt, per KZ gesteuert
+1500:rz_eintrag_2;n..7:74;M;Variabler Inhalt, per KZ gesteuert
+1500:datum_rechnung;n5:81;M;Datum der Rechnung, JMMDD
+1500:ls_auftrag_kz_1;n1:86;M;Kennzeichen Lieferschein/Auftrag
+1500:ls_auftrag_nr_1;n..7:87;C;Lieferschein-/Auftragsnummer 1
+1500:ls_auftrag_kz_2;n1:94;M;Kennzeichen Lieferschein/Auftrag
+1500:ls_auftrag_nr_2;n..7:95;C;Lieferschein-/Auftragsnummer 2
+1500:ls_auftrag_kz_3;n1:102;M;Kennzeichen Lieferschein/Auftrag
+1500:ls_auftrag_nr_3;n..7:103;C;Lieferschein-/Auftragsnummer 3
+1500:ls_auftrag_kz_4;n1:110;M;Kennzeichen Lieferschein/Auftrag
+1500:ls_auftrag_nr_4;n..7:111;C;Lieferschein-/Auftragsnummer 4
+1500:ls_auftrag_kz_5;n1:118;M;Kennzeichen Lieferschein/Auftrag
+1500:ls_auftrag_nr_5;n..7:119;C;Lieferschein-/Auftragsnummer 5
+1500:positions_nr;n..6:126;M;Positionsnummer des Satzes
+1500:b_vereinbarung_kz_1;n1:132;M;Kennzeichen Besondere Vereinbarungen 1
+1500:b_vereinbarung_1;n..8:133;C;Kennzeichen Besondere Vereinbarungen 1
+1500:b_vereinbarung_kz_2;n1:141;M;Kennzeichen Besondere Vereinbarungen 2
+1500:b_vereinbarung_2;n..5:142;C;Kennzeichen Besondere Vereinbarungen 2
+1500:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+1501:satzart;n2:1;M;Satzart-ID
+1501:frei1;an..22:3;C;Frei
+1501:bbn_rechnungsempfaenger;n13:25;C;bbn-13 des Rechnungsempfaengers
+1501:bbn_warenlieferant;n13:38;C;bbn oder bbn-13 des Warenlieferanten
+1501:ls_auftrag_kz;n1:51;M;Kennzeichen Lieferschein/Auftrag
+1501:ls_auftrag_nr_1;an..17:52;C;Lieferschein-/Auftragsnummer 1
+1501:ls_auftrag_nr_2;an..17:69;C;Lieferschein-/Auftragsnummer 2
+1501:ust_ident_nr_lieferant;an..14:86;C;Umsatzsteuer-Identnummer des Lieferanten
+1501:ust_ident_nr_erwerber;an..14:100;C;Umsatzsteuer-Identnummer des Erwerbers
+1501:frei2;an..12:114;C;Frei
+1501:positions_nr;n..6:126;M;Positionsnummer des Satzes
+1501:steuer_nr;an..15:132;M;Nummer des Steuerzahlers
+1501:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+1508:satzart;n2:1;M;Satzart-ID
+1508:bbn_lieferant;n7:3;M;bbn des Lieferanten
+1508:bbn_rechnungsempfaenger;n7:10;M;bbn des Rechnungsempfaengers
+1508:beleg_kz;n1:17;M;Kennzeichen - 1 = Belegnummer
+1508:beleg_nr;n..7:18;M;Belegnummer
+1508:freitext;an..101:25;M;Erlaeuterungen
+1508:positions_nr;n..6:126;M;Positionsnummer des Satzes
+1508:frei1;an..15:132;C;Frei
+1508:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+1600:satzart;n2:1;M;Satzart-ID
+1600:bbn_lieferant;n7:3;M;bbn des Lieferanten
+1600:bbn_rechnungsempfaenger;n7:10;M;bbn des Rechnungsempfaengers
+1600:beleg_kz;n1:17;M;Kennzeichen - 1 = Belegnummer
+1600:beleg_nr;n..7:18;M;Belegnummer
+1600:ean;n12:25;M;EAN/GTIN
+1600:mengenschluessel;n2:37;M;Gibt die Packungsart an
+1600:komma_kz_m;n1:39;M;Komma-Kennzeichen Menge: 1..5 = 0..4 Nachkommastellen, 0=leer
+1600:menge;n..7:40;M;Menge
+1600:preisschluessel;n2:47;M;Preisschluessel, 00/01/02/03/09
+1600:komma_kz_p;n1:49;M;Komma-Kennzeichen Preis
+1600:grundpreis;n..6:50;C;Grundpreis
+1600:vkz;an..2:56;M;Verschiedene Kennzeichen, Nr. 13
+1600:artikelrabatt_gesamt;n..8:58;C;Addition aller auf den Artikel gewaehrten Rabatte
+1600:warenwert;n..9:66;C;Menge * Grundpreis - Gesamtrabatt
+1600:umsatzsteuer_kz;n1:75;M;USt-Kennzeichen
+1600:frei1;an..5:76;C;Frei
+1600:datum_rechnung;n5:81;M;Datum Rechnung, JMMTT
+1600:rabatt_kz_1;n2:86;M;Rabatt-Kennzeichen, Nr. 10
+1600:artikelrabatt_1;n..8:88;C;Artikelrabatt 1
+1600:rabatt_kz_2;n2:96;M;Rabatt-Kennzeichen, Nr. 10
+1600:artikelrabatt_2;n..8:98;C;Artikelrabatt 2
+1600:rabatt_kz_3;n2:106;M;Rabatt-Kennzeichen, Nr. 10
+1600:artikelrabatt_3;n..8:108;C;Artikelrabatt 3
+1600:rabatt_kz_4;n2:116;M;Rabatt-Kennzeichen, Nr. 10
+1600:artikelrabatt_4;n..8:118;C;Artikelrabatt 4
+1600:positions_nr;n..6:126;M;Positionsnummer des Satzes
+1600:schluessel_kz;n2:132;M;Schluessel-Kennzeichen Besondere Vereinbarungen 1
+1600:komma_kz;n1:134;C;Definiert die Stellung des Dezimalkommas
+1600:sondereintrag;n..6:135;C;Sondereintrag Besondere Vereinbarungen 1
+1600:b_vereinbarung_kz_2;n1:141;M;Kennzeichen Besondere Vereinbarungen 2
+1600:b_vereinbarung_2;n..5:142;C;Kennzeichen Besondere Vereinbarungen 2
+1600:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+1602:satzart;n2:1;M;Satzart-ID
+1602:frei1;an..22:3;C;Frei
+1602:ust_prozentsatz;n..5:25;C;Umsatzsteuer, Prozentsatz - Format xx,yyy
+1602:preisschluessel;n2:30;M;1;Preisschluessel, Nr. 7
+1602:komma_kz_p;n1:32;M;Komma-Kennzeichen Preis
+1602:grundpreis;n..7:33;C;Grundpreis
+1602:mengenschluessel;n2:40;M;Gibt die Packungsart an
+1602:komma_kz_m;n1:42;M;Komma-Kennzeichen Menge: 1..5 = 0..4 Nachkommastellen, 0=leer
+1602:menge;n..10:43;C;Menge
+1602:frei2;an..73:53;C;Frei
+1602:positions_nr;n..6:126;M;Positionsnummer des Satzes
+1602:frei3;an..15:132;C;Frei
+1602:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+1604:satzart;n2:1;M;Satzart-ID
+1604:bbn_lieferant;n7:3;M;bbn des Lieferanten
+1604:bbn_rechnungsempfaenger;n7:10;M;bbn des Rechnungsempfaengers
+1604:beleg_kz;n1:17;M;Kennzeichen - 1 = Belegnummer
+1604:beleg_nr;n..7:18;M;Belegnummer
+1604:ean;n12:25;M;EAN/GTIN
+1604:artikelgruppen_nr_1;n2:37;M;Artikelgruppen-Nummer 1, 99 falls keine Zuordnungen
+1604:rabatt_kz_1;n2:39;M;Rabatt-Kennzeichen 1, Nr. 10
+1604:rabatt_1;n..8:41;M;Artikelrabatt 1
+1604:artikelgruppen_nr_2;n2:49;M;Artikelgruppen-Nummer 2, 99 falls keine Zuordnungen
+1604:rabatt_kz_2;n2:51;C;Rabatt-Kennzeichen 2, Nr. 10
+1604:rabatt_2;n..8:53;M;Artikelrabatt 2
+1604:artikelgruppen_nr_3;n2:61;M;Artikelgruppen-Nummer 3, 99 falls keine Zuordnungen
+1604:rabatt_kz_3;n2:63;C;Rabatt-Kennzeichen 3, Nr. 10
+1604:rabatt_3;n..8:65;M;Artikelrabatt 3
+1604:artikelgruppen_nr_4;n2:73;M;Artikelgruppen-Nummer 4, 99 falls keine Zuordnungen
+1604:rabatt_kz_4;n2:75;C;Rabatt-Kennzeichen 4, Nr. 10
+1604:rabatt_4;n..8:77;M;Artikelrabatt 4
+1604:artikelgruppen_nr_5;n2:85;M;Artikelgruppen-Nummer 5, 99 falls keine Zuordnungen
+1604:rabatt_kz_5;n2:87;C;Rabatt-Kennzeichen 5, Nr. 10
+1604:rabatt_5;n..8:89;M;Artikelrabatt 5
+1604:artikelgruppen_nr_6;n2:97;M;Artikelgruppen-Nummer 6, 99 falls keine Zuordnungen
+1604:rabatt_kz_6;n2:99;C;Rabatt-Kennzeichen 6, Nr. 10
+1604:rabatt_6;n..8:101;M;Artikelrabatt 6
+1604:artikelgruppen_nr_7;n2:109;M;Artikelgruppen-Nummer 7, 99 falls keine Zuordnungen
+1604:rabatt_kz_7;n2:111;C;Rabatt-Kennzeichen 7, Nr. 10
+1604:rabatt_7;n..8:113;M;Artikelrabatt 7
+1604:frei1;an..5:121;C;Frei
+1604:positions_nr;n..6:126;M;Positionsnummer des Satzes
+1604:frei2;an..15:132;C;Frei
+1604:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+1606:satzart;n2:1;M;Satzart-ID
+1606:bbn_lieferant;n7:3;M;bbn des Lieferanten
+1606:bbn_rechnungsempfaenger;n7:10;M;bbn des Rechnungsempfaengers
+1606:beleg_kz;n1:17;M;Kennzeichen - 1 = Belegnummer
+1606:beleg_nr;n..7:18;M;Belegnummer
+1606:basiswert_1;n..11:25;M;Basiswert 1, 4 Nachkommastellen
+1606:zu_abschlag_kz_1;n1:36;M;Beschreibung des Zu-/Abschlags 1
+1606:zu_abschlag_1;n..8:37;M;Zu-/Abschlag 1
+1606:schluessel_1;n3:45;C;Schluessel zum Zu-/Abschlag 1, Nr. 10
+1606:basiswert_2;n..11:48;M;Basiswert 2, 4 Nachkommastellen
+1606:zu_abschlag_kz_2;n1:59;M;Beschreibung des Zu-/Abschlags 2
+1606:zu_abschlag_2;n..8:60;M;Zu-/Abschlag 2
+1606:schluessel_2;n3:68;C;Schluessel zum Zu-/Abschlag 2, Nr. 10
+1606:basiswert_3;n..11:71;M;Basiswert 3, 4 Nachkommastellen
+1606:zu_abschlag_kz_3;n1:82;M;Beschreibung des Zu-/Abschlags 3
+1606:zu_abschlag_3;n..8:83;M;Zu-/Abschlag 3
+1606:schluessel_3;n3:91;C;Schluessel zum Zu-/Abschlag 3, Nr. 10
+1606:basiswert_4;n..11:94;M;Basiswert 4, 4 Nachkommastellen
+1606:zu_abschlag_kz_4;n1:105;M;Beschreibung des Zu-/Abschlags 4
+1606:zu_abschlag_4;n..8:106;M;Zu-/Abschlag 4
+1606:schluessel_4;n3:114;C;Schluessel zum Zu-/Abschlag 4, Nr. 10
+1606:frei1;an..9:117;C;Frei
+1606:positions_nr;n..6:126;M;Positionsnummer des Satzes
+1606:frei2;an..15:132;C;Frei
+1606:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+1608:satzart;n2:1;M;Satzart-ID
+1608:bbn_lieferant;n7:3;M;bbn des Lieferanten
+1608:bbn_rechnungsempfaenger;n7:10;M;bbn des Rechnungsempfaengers
+1608:beleg_kz;n1:17;M;Kennzeichen - 1 = Belegnummer
+1608:beleg_nr;n..7:18;M;Belegnummer
+1608:freitext;an..101:25;M;Erlaeuterungen
+1608:positions_nr;n..6:126;M;Positionsnummer des Satzes
+1608:frei1;an..15:132;C;Frei
+1608:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+1700:satzart;n2:1;M;Satzart-ID
+1700:bbn_lieferant;n7:3;M;bbn des Lieferanten
+1700:bbn_rechnungsempfaenger;n7:10;M;bbn des Rechnungsempfaengers
+1700:beleg_kz;n1:17;M;Kennzeichen - 1 = Belegnummer
+1700:beleg_nr;n..7:18;M;Belegnummer
+1700:ust_kz;n1:25;M;Umsatzsteuer-Kennzeichen, Nr. 1
+1700:warenbetrag;n..10:26;M;Warenbetrag oder Menge
+1700:frei1;an..2:36;C;Frei
+1700:rechnungsrabatt_gesamt;n..8:38;C;Rechnungsrabatt gesamt
+1700:fracht_verpackung_kz;n1:46;M;Fracht-/Verpackungs-Kennzeichen, Nr. 8
+1700:frachtbelastung;n..7:47;C;Frachtbelastung (ausser wenn negativ)
+1700:skonto;n..7:54;C;Skonto - Zwei Nachkommastellen!
+1700:umsatzsteuer;n..8:61;C;Umsatzsteuer
+1700:endbetrag;n..9:69;M;Endbetrag der Rechnung
+1700:frei2;an..3:78;C;Frei
+1700:datum_rechnung;n5:81;M;Datum Rechnung, JMMTT
+1700:rabatt_kz_1;n2:86;C;Rabatt-Kennzeichen, Nr. 10
+1700:rechnungsrabatt_1;n..8:88;C;Rechnungsrabatt 1
+1700:rabatt_kz_2;n2:96;C;Rabatt-Kennzeichen, Nr. 10
+1700:rechnungsrabatt_2;n..8:98;C;Rechnungsrabatt 2
+1700:rabatt_kz_3;n2:106;C;Rabatt-Kennzeichen, Nr. 10
+1700:rechnungsrabatt_3;n..8:108;C;Rechnungsrabatt 3
+1700:rabatt_kz_4;n2:116;C;Rabatt-Kennzeichen, Nr. 10
+1700:rechnungsrabatt_4;n..8:118;C;Rechnungsrabatt 4
+1700:positions_nr;n..6:126;M;Positionsnummer des Satzes
+1700:b_vereinbarung_kz_1;n1:132;M;Kennzeichen Besondere Vereinbarungen 1
+1700:b_vereinbarung_1;n..8:133;C;Kennzeichen Besondere Vereinbarungen 1
+1700:b_vereinbarung_kz_2;n1:141;M;Kennzeichen Besondere Vereinbarungen 2
+1700:b_vereinbarung_2;n..5:142;C;Kennzeichen Besondere Vereinbarungen 2
+1700:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+1708:satzart;n2:1;M;Satzart-ID
+1708:bbn_lieferant;n7:3;M;bbn des Lieferanten
+1708:bbn_rechnungsempfaenger;n7:10;M;bbn des Rechnungsempfaengers
+1708:beleg_kz;n1:17;M;Kennzeichen - 1 = Belegnummer
+1708:beleg_nr;n..7:18;M;Belegnummer
+1708:freitext;an..101:25;M;Erlaeuterungen
+1708:positions_nr;n..6:126;M;Positionsnummer des Satzes
+1708:frei1;an..15:132;C;Frei
+1708:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+2200:satzart;n2:1;M;Satzart-ID
+2200:bbn_lieferant;n7:3;M;bbn des Lieferanten
+2200:bbn_rechnungsempfaenger;n7:10;M;bbn des Rechnungsempfaengers
+2200:beleg_kz;n1:17;M;Kennzeichen - 1 = Belegnummer
+2200:beleg_nr;n..7:18;M;Belegnummer
+2200:ls_auftrag_kz;n1:25;M;Kennzeichen Lieferschein/Auftrag
+2200:ls_auftrag_nr;an..7:26;M;Lieferschein-/Auftrags-Nummer
+2200:auftrags_nr_besteller;an..7:33;C;Auftragsnummer des Bestellers
+2200:lieferdatum;n6:40;M;Lieferdatum, JJMMTT
+2200:frei1;an..6:46;C;Frei
+2200:warenempfaenger_kz;n1:52;M;Kennzeichen Warenempfaenger - 1=bbs, 2=bbn/intern, 3=nur bbn
+2200:bbn_warenempfaenger;n7:53;M;bbn des Warenempfaengers
+2200:interne_nr;n..6:60;M;Interne Kunden/Filialnummer
+2200:s_rechnung_kz;n1:66;M;Kennzeichen Strecken/Summenrechnung
+2200:s_rechnung_nr;n..7:67;C;Strecken-/Summen-Rechnungsnummer
+2200:datum_s_beleg;n6:74;C;Datum des S.-Belegs
+2200:frei2;an1:80;C;Frei
+2200:datum_liefernachweis;n5:81;M;Datum des Liefernachweises, JMMTT
+2200:ls_auftrag_kz_1;n1:86;M;Kennzeichen Lieferschein/Auftrag
+2200:ls_auftrag_nr_1;n..7:87;C;Lieferschein-/Auftragsnummer 1
+2200:ls_auftrag_kz_2;n1:94;M;Kennzeichen Lieferschein/Auftrag
+2200:ls_auftrag_nr_2;n..7:95;C;Lieferschein-/Auftragsnummer 2
+2200:ls_auftrag_kz_3;n1:102;M;Kennzeichen Lieferschein/Auftrag
+2200:ls_auftrag_nr_3;n..7:103;C;Lieferschein-/Auftragsnummer 3
+2200:ls_auftrag_kz_4;n1:110;M;Kennzeichen Lieferschein/Auftrag
+2200:ls_auftrag_nr_4;n..7:111;C;Lieferschein-/Auftragsnummer 4
+2200:ls_auftrag_kz_5;n1:118;M;Kennzeichen Lieferschein/Auftrag
+2200:ls_auftrag_nr_5;n..7:119;C;Lieferschein-/Auftragsnummer 5
+2200:positions_nr;n..6:126;M;Positionsnummer des Satzes
+2200:b_vereinbarung_kz_1;n1:132;M;Kennzeichen Besondere Vereinbarungen 1
+2200:b_vereinbarung_1;n..8:133;M;Kennzeichen Besondere Vereinbarungen 1
+2200:b_vereinbarung_kz_2;n1:141;M;Kennzeichen Besondere Vereinbarungen 2
+2200:b_vereinbarung_2;n..5:142;M;Kennzeichen Besondere Vereinbarungen 2
+2200:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+2201:satzart;n2:1;M;Satzart-ID
+2201:frei1;an..22:3;C;Frei
+2201:bbn_rechnungsempfaenger;n13:25;C;bbn-13 des Rechnungsempfaengers
+2201:bbn_warenlieferant;n13:38;C;bbn oder bbn-13 des Warenlieferanten
+2201:ls_auftrag_kz;n1:51;M;Kennzeichen Lieferschein/Auftrag
+2201:ls_auftrag_nr_1;an..17:52;C;Lieferschein-/Auftragsnummer 1
+2201:ls_auftrag_nr_2;an..17:69;C;Lieferschein-/Auftragsnummer 2
+2201:ust_ident_nr_lieferant;an..14:86;C;Umsatzsteuer-Identnummer des Lieferanten
+2201:ust_ident_nr_erwerber;an..14:100;C;Umsatzsteuer-Identnummer des Erwerbers
+2201:frei2;an..12:114;C;Frei
+2201:positions_nr;n..6:126;M;Positionsnummer des Satzes
+2201:steuer_nr;an..15:132;M;Nummer des Steuerzahlers
+2201:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+2208:satzart;n2:1;M;Satzart-ID
+2208:bbn_lieferant;n7:3;M;bbn des Lieferanten
+2208:bbn_rechnungsempfaenger;n7:10;M;bbn des Rechnungsempfaengers
+2208:beleg_kz;n1:17;M;Kennzeichen - 1 = Belegnummer
+2208:beleg_nr;n..7:18;M;Belegnummer
+2208:freitext;an..101:25;M;Erlaeuterungen
+2208:positions_nr;n..6:126;M;Positionsnummer des Satzes
+2208:frei1;an..15:132;C;Frei
+2208:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+2300:satzart;n2:1;M;Satzart-ID
+2300:bbn_lieferant;n7:3;M;bbn des Lieferanten
+2300:bbn_rechnungsempfaenger;n7:10;M;bbn des Rechnungsempfaengers
+2300:beleg_kz;n1:17;M;Kennzeichen - 1 = Belegnummer
+2300:beleg_nr;n..7:18;M;Belegnummer
+2300:ean;n12:25;M;EAN/GTIN
+2300:mengenschluessel;n2:37;M;Gibt die Packungsart an
+2300:komma_kz_m;n1:39;M;Komma-Kennzeichen Menge: 1..5 = 0..4 Nachkommastellen, 0=leer
+2300:menge;n..7:40;M;Menge
+2300:preisschluessel;n2:47;M;Preisschluessel, 00/01/02/03/09
+2300:komma_kz_p;n1:49;M;Komma-Kennzeichen Preis
+2300:grundpreis;n..6:50;C;Grundpreis
+2300:frei1;an..2:56;C;Frei
+2300:artikelrabatt_gesamt;n..8:58;C;Addition aller auf den Artikel gewaehrten Rabatte
+2300:warenwert;n..9:66;C;Menge * Grundpreis - Gesamtrabatt
+2300:umsatzsteuer_kz;n1:75;M;USt-Kennzeichen
+2300:kondition;n1:76;C;Bilateral zu vereinbaren
+2300:frei2;an..4:77;C;Frei
+2300:datum_liefernachweis;n5:81;M;Datum Liefernachweis, JMMTT
+2300:rabatt_kz_1;n2:86;M;Rabatt-Kennzeichen, Nr. 10
+2300:artikelrabatt_1;n..8:88;C;Artikelrabatt 1
+2300:rabatt_kz_2;n2:96;M;Rabatt-Kennzeichen, Nr. 10
+2300:artikelrabatt_2;n..8:98;C;Artikelrabatt 2
+2300:rabatt_kz_3;n2:106;M;Rabatt-Kennzeichen, Nr. 10
+2300:artikelrabatt_3;n..8:108;C;Artikelrabatt 3
+2300:rabatt_kz_4;n2:116;M;Rabatt-Kennzeichen, Nr. 10
+2300:artikelrabatt_4;n..8:118;C;Artikelrabatt 4
+2300:positions_nr;n..6:126;M;Positionsnummer des Satzes
+2300:schluessel_kz;n2:132;M;Schluessel-Kennzeichen Besondere Vereinbarungen 1
+2300:komma_kz;n1:134;C;Definiert die Stellung des Dezimalkommas
+2300:sondereintrag;n..6:135;C;Sondereintrag Besondere Vereinbarungen 1
+2300:b_vereinbarung_kz_2;n1:141;M;Kennzeichen Besondere Vereinbarungen 2
+2300:b_vereinbarung_2;n..5:142;C;Kennzeichen Besondere Vereinbarungen 2
+2300:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+2302:satzart;n2:1;M;Satzart-ID
+2302:frei1;an..22:3;C;Frei
+2302:ust_prozentsatz;n..5:25;C;Umsatzsteuer, Prozentsatz - Format xx,yyy
+2302:preisschluessel;n2:30;M;1;Preisschluessel, Nr. 7
+2302:komma_kz_p;n1:32;M;Komma-Kennzeichen Preis
+2302:grundpreis;n..7:33;C;Grundpreis
+2302:mengenschluessel;n2:40;M;Gibt die Packungsart an
+2302:komma_kz_m;n1:42;M;Komma-Kennzeichen Menge: 1..5 = 0..4 Nachkommastellen, 0=leer
+2302:menge;n..10:43;C;Menge
+2302:frei2;an..73:53;C;Frei
+2302:positions_nr;n..6:126;M;Positionsnummer des Satzes
+2302:frei3;an..15:132;C;Frei
+2302:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+2308:satzart;n2:1;M;Satzart-ID
+2308:bbn_lieferant;n7:3;M;bbn des Lieferanten
+2308:bbn_rechnungsempfaenger;n7:10;M;bbn des Rechnungsempfaengers
+2308:beleg_kz;n1:17;M;Kennzeichen - 1 = Belegnummer
+2308:beleg_nr;n..7:18;M;Belegnummer
+2308:freitext;an..101:25;M;Erlaeuterungen
+2308:positions_nr;n..6:126;M;Positionsnummer des Satzes
+2308:frei1;an..15:132;C;Frei
+2308:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+2400:satzart;n2:1;M;Satzart-ID
+2400:bbn_lieferant;n7:3;M;bbn des Lieferanten
+2400:bbn_rechnungsempfaenger;n7:10;M;bbn des Rechnungsempfaengers
+2400:beleg_kz;n1:17;M;Kennzeichen - 1 = Belegnummer
+2400:beleg_nr;n..7:18;M;Belegnummer
+2400:ust_kz;n1:25;M;Umsatzsteuer-Kennzeichen, Nr. 1
+2400:warenwert_kz;n1:26;M;Warenwert-Kennzeichen, Nr. 11
+2400:komma_kz;n1:27;C;Definiert die Stellung des Dezimalkommas, Nr. 4
+2400:warenbetrag_menge;n..8:28;M;Warenbetrag oder Menge
+2400:frei1;an..2:36;C;Frei
+2400:nachweisrabatt_gesamt;n..8:38;C;Liefernachweisrabatt gesamt
+2400:fracht_verpackung_kz;n1:46;M;Fracht-/Verpackungs-Kennzeichen, Nr. 8
+2400:fracht_verpackung;n..7:47;C;Fracht/Verpackung/Versicherung
+2400:skonto;n..7:54;C;Skonto - Zwei Nachkommastellen!
+2400:nachweis_endbetrag;n..9:61;C;Liefernachweis-Endbetrag
+2400:frei2;an..11:70;C;Frei
+2400:datum_liefernachweis;n5:81;M;Datum Liefernachweis, JMMTT
+2400:rabatt_kz_1;n2:86;M;Rabatt-Kennzeichen, Nr. 10
+2400:nachweisrabatt_1;n..8:88;C;Liefernachweisrabatt 1
+2400:rabatt_kz_2;n2:96;M;Rabatt-Kennzeichen, Nr. 10
+2400:nachweisrabatt_2;n..8:98;C;Liefernachweisrabatt 2
+2400:rabatt_kz_3;n2:106;M;Rabatt-Kennzeichen, Nr. 10
+2400:nachweisrabatt_3;n..8:108;C;Liefernachweisrabatt 3
+2400:rabatt_kz_4;n2:116;M;Rabatt-Kennzeichen, Nr. 10
+2400:nachweisrabatt_4;n..8:118;C;Liefernachweisrabatt 4
+2400:positions_nr;n..6:126;M;Positionsnummer des Satzes
+2400:b_vereinbarung_kz_1;n1:132;M;Kennzeichen Besondere Vereinbarungen 1
+2400:b_vereinbarung_1;n..8:133;M;Kennzeichen Besondere Vereinbarungen 1
+2400:b_vereinbarung_kz_2;n1:141;M;Kennzeichen Besondere Vereinbarungen 2
+2400:b_vereinbarung_2;n..5:142;C;Kennzeichen Besondere Vereinbarungen 2
+2400:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+2408:satzart;n2:1;M;Satzart-ID
+2408:bbn_lieferant;n7:3;M;bbn des Lieferanten
+2408:bbn_rechnungsempfaenger;n7:10;M;bbn des Rechnungsempfaengers
+2408:beleg_kz;n1:17;M;Kennzeichen - 1 = Belegnummer
+2408:beleg_nr;n..7:18;M;Belegnummer
+2408:freitext;an..101:25;M;Erlaeuterungen
+2408:positions_nr;n..6:126;M;Positionsnummer des Satzes
+2408:frei1;an..15:132;C;Frei
+2408:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+2500:satzart;n2:1;M;Satzart-ID
+2500:bbn_lieferant;n7:3;M;bbn des Lieferanten
+2500:bbn_rechnungsempfaenger;n7:10;M;bbn des Rechnungsempfaengers
+2500:beleg_kz;n1:17;M;Kennzeichen - 1 = Belegnummer
+2500:beleg_nr;n..7:18;M;Belegnummer
+2500:ls_auftrag_kz;n1:25;M;Kennzeichen Lieferschein/Auftrag
+2500:ls_auftrag_nr;an..7:26;C;Lieferschein-/Auftrags-Nummer
+2500:auftrags_nr_besteller;an..7:33;C;Auftragsnummer des Bestellers
+2500:lieferdatum;n6:40;C;Lieferdatum, JJMMTT
+2500:valutadatum;n6:46;C;Valutadatum, JJMMDD
+2500:warenempfaenger_kz;n1:52;M;Kennzeichen Warenempfaenger - 1=bbs, 2=bbn/intern, 3=nur bbn
+2500:bbn_warenempfaenger;n7:53;M;bbn des Warenempfaengers
+2500:interne_nr;n..6:60;M;Interne Kunden/Filialnummer
+2500:reli_zahlungsempfaenger_kz;n1:66;M;Kennzeichen Rechnungsliste
+2500:rz_eintrag_1;n..7:67;M;Variabler Inhalt, per KZ gesteuert
+2500:rz_eintrag_2;n..7:74;M;Variabler Inhalt, per KZ gesteuert
+2500:datum_rechnung;n5:81;M;Datum der Rechnung, JMMDD
+2500:ls_auftrag_kz_1;n1:86;M;Kennzeichen Lieferschein/Auftrag
+2500:ls_auftrag_nr_1;n..7:87;C;Lieferschein-/Auftragsnummer 1
+2500:ls_auftrag_kz_2;n1:94;M;Kennzeichen Lieferschein/Auftrag
+2500:ls_auftrag_nr_2;n..7:95;C;Lieferschein-/Auftragsnummer 2
+2500:ls_auftrag_kz_3;n1:102;M;Kennzeichen Lieferschein/Auftrag
+2500:ls_auftrag_nr_3;n..7:103;C;Lieferschein-/Auftragsnummer 3
+2500:ls_auftrag_kz_4;n1:110;M;Kennzeichen Lieferschein/Auftrag
+2500:ls_auftrag_nr_4;n..7:111;C;Lieferschein-/Auftragsnummer 4
+2500:ls_auftrag_kz_5;n1:118;M;Kennzeichen Lieferschein/Auftrag
+2500:ls_auftrag_nr_5;n..7:119;C;Lieferschein-/Auftragsnummer 5
+2500:positions_nr;n..6:126;M;Positionsnummer des Satzes
+2500:b_vereinbarung_kz_1;n1:132;M;Kennzeichen Besondere Vereinbarungen 1
+2500:b_vereinbarung_1;n..8:133;C;Kennzeichen Besondere Vereinbarungen 1
+2500:b_vereinbarung_kz_2;n1:141;M;Kennzeichen Besondere Vereinbarungen 2
+2500:b_vereinbarung_2;n..5:142;C;Kennzeichen Besondere Vereinbarungen 2
+2500:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+2501:satzart;n2:1;M;Satzart-ID
+2501:frei1;an..22:3;C;Frei
+2501:bbn_rechnungsempfaenger;n13:25;C;bbn-13 des Rechnungsempfaengers
+2501:bbn_warenlieferant;n13:38;C;bbn oder bbn-13 des Warenlieferanten
+2501:ls_auftrag_kz;n1:51;M;Kennzeichen Lieferschein/Auftrag
+2501:ls_auftrag_nr_1;an..17:52;C;Lieferschein-/Auftragsnummer 1
+2501:ls_auftrag_nr_2;an..17:69;C;Lieferschein-/Auftragsnummer 2
+2501:ust_ident_nr_lieferant;an..14:86;C;Umsatzsteuer-Identnummer des Lieferanten
+2501:ust_ident_nr_erwerber;an..14:100;C;Umsatzsteuer-Identnummer des Erwerbers
+2501:frei2;an..12:114;C;Frei
+2501:positions_nr;n..6:126;M;Positionsnummer des Satzes
+2501:steuer_nr;an..15:132;M;Nummer des Steuerzahlers
+2501:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+2508:satzart;n2:1;M;Satzart-ID
+2508:bbn_lieferant;n7:3;M;bbn des Lieferanten
+2508:bbn_rechnungsempfaenger;n7:10;M;bbn des Rechnungsempfaengers
+2508:beleg_kz;n1:17;M;Kennzeichen - 1 = Belegnummer
+2508:beleg_nr;n..7:18;M;Belegnummer
+2508:freitext;an..101:25;M;Erlaeuterungen
+2508:positions_nr;n..6:126;M;Positionsnummer des Satzes
+2508:frei1;an..15:132;C;Frei
+2508:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+2600:satzart;n2:1;M;Satzart-ID
+2600:bbn_lieferant;n7:3;M;bbn des Lieferanten
+2600:bbn_rechnungsempfaenger;n7:10;M;bbn des Rechnungsempfaengers
+2600:beleg_kz;n1:17;M;Kennzeichen - 1 = Belegnummer
+2600:beleg_nr;n..7:18;M;Belegnummer
+2600:ean;n12:25;M;EAN/GTIN
+2600:mengenschluessel;n2:37;M;Gibt die Packungsart an
+2600:komma_kz_m;n1:39;M;Komma-Kennzeichen Menge: 1..5 = 0..4 Nachkommastellen, 0=leer
+2600:menge;n..7:40;M;Menge
+2600:preisschluessel;n2:47;M;Preisschluessel, 00/01/02/03/09
+2600:komma_kz_p;n1:49;M;Komma-Kennzeichen Preis
+2600:grundpreis;n..6:50;C;Grundpreis
+2600:vkz;an..2:56;M;Verschiedene Kennzeichen, Nr. 13
+2600:artikelrabatt_gesamt;n..8:58;C;Addition aller auf den Artikel gewaehrten Rabatte
+2600:warenwert;n..9:66;C;Menge * Grundpreis - Gesamtrabatt
+2600:umsatzsteuer_kz;n1:75;M;USt-Kennzeichen
+2600:frei1;an..4:77;C;Frei
+2600:datum_rechnung;n5:81;M;Datum Rechnung, JMMTT
+2600:rabatt_kz_1;n2:86;M;Rabatt-Kennzeichen, Nr. 10
+2600:artikelrabatt_1;n..8:88;C;Artikelrabatt 1
+2600:rabatt_kz_2;n2:96;M;Rabatt-Kennzeichen, Nr. 10
+2600:artikelrabatt_2;n..8:98;C;Artikelrabatt 2
+2600:rabatt_kz_3;n2:106;M;Rabatt-Kennzeichen, Nr. 10
+2600:artikelrabatt_3;n..8:108;C;Artikelrabatt 3
+2600:rabatt_kz_4;n2:116;M;Rabatt-Kennzeichen, Nr. 10
+2600:artikelrabatt_4;n..8:118;C;Artikelrabatt 4
+2600:positions_nr;n..6:126;M;Positionsnummer des Satzes
+2600:schluessel_kz;n2:132;M;Schluessel-Kennzeichen Besondere Vereinbarungen 1
+2600:komma_kz;n1:134;C;Definiert die Stellung des Dezimalkommas
+2600:sondereintrag;n..6:135;C;Sondereintrag Besondere Vereinbarungen 1
+2600:b_vereinbarung_kz_2;n1:141;M;Kennzeichen Besondere Vereinbarungen 2
+2600:b_vereinbarung_2;n..5:142;C;Kennzeichen Besondere Vereinbarungen 2
+2600:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+2602:satzart;n2:1;M;Satzart-ID
+2602:frei1;an..22:3;C;Frei
+2602:ust_prozentsatz;n..5:25;C;Umsatzsteuer, Prozentsatz - Format xx,yyy
+2602:preisschluessel;n2:30;M;1;Preisschluessel, Nr. 7
+2602:komma_kz_p;n1:32;M;Komma-Kennzeichen Preis
+2602:grundpreis;n..7:33;C;Grundpreis
+2602:mengenschluessel;n2:40;M;Gibt die Packungsart an
+2602:komma_kz_m;n1:42;M;Komma-Kennzeichen Menge: 1..5 = 0..4 Nachkommastellen, 0=leer
+2602:menge;n..10:43;C;Menge
+2602:frei2;an..73:53;C;Frei
+2602:positions_nr;n..6:126;M;Positionsnummer des Satzes
+2602:frei3;an..15:132;C;Frei
+2602:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+2604:satzart;n2:1;M;Satzart-ID
+2604:bbn_lieferant;n7:3;M;bbn des Lieferanten
+2604:bbn_rechnungsempfaenger;n7:10;M;bbn des Rechnungsempfaengers
+2604:beleg_kz;n1:17;M;Kennzeichen - 1 = Belegnummer
+2604:beleg_nr;n..7:18;M;Belegnummer
+2604:ean;n12:25;M;EAN/GTIN
+2604:artikelgruppen_nr_1;n2:37;M;Artikelgruppen-Nummer 1, 99 falls keine Zuordnungen
+2604:rabatt_kz_1;n2:39;M;Rabatt-Kennzeichen 1, Nr. 10
+2604:rabatt_1;n..8:41;M;Artikelrabatt 1
+2604:artikelgruppen_nr_2;n2:49;M;Artikelgruppen-Nummer 2, 99 falls keine Zuordnungen
+2604:rabatt_kz_2;n2:51;C;Rabatt-Kennzeichen 2, Nr. 10
+2604:rabatt_2;n..8:53;M;Artikelrabatt 2
+2604:artikelgruppen_nr_3;n2:61;M;Artikelgruppen-Nummer 3, 99 falls keine Zuordnungen
+2604:rabatt_kz_3;n2:63;C;Rabatt-Kennzeichen 3, Nr. 10
+2604:rabatt_3;n..8:65;M;Artikelrabatt 3
+2604:artikelgruppen_nr_4;n2:73;M;Artikelgruppen-Nummer 4, 99 falls keine Zuordnungen
+2604:rabatt_kz_4;n2:75;C;Rabatt-Kennzeichen 4, Nr. 10
+2604:rabatt_4;n..8:77;M;Artikelrabatt 4
+2604:artikelgruppen_nr_5;n2:85;M;Artikelgruppen-Nummer 5, 99 falls keine Zuordnungen
+2604:rabatt_kz_5;n2:87;C;Rabatt-Kennzeichen 5, Nr. 10
+2604:rabatt_5;n..8:89;M;Artikelrabatt 5
+2604:artikelgruppen_nr_6;n2:97;M;Artikelgruppen-Nummer 6, 99 falls keine Zuordnungen
+2604:rabatt_kz_6;n2:99;C;Rabatt-Kennzeichen 6, Nr. 10
+2604:rabatt_6;n..8:101;M;Artikelrabatt 6
+2604:artikelgruppen_nr_7;n2:109;M;Artikelgruppen-Nummer 7, 99 falls keine Zuordnungen
+2604:rabatt_kz_7;n2:111;C;Rabatt-Kennzeichen 7, Nr. 10
+2604:rabatt_7;n..8:113;M;Artikelrabatt 7
+2604:frei1;an..5:121;C;Frei
+2604:positions_nr;n..6:126;M;Positionsnummer des Satzes
+2604:frei2;an..15:132;C;Frei
+2604:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+2606:satzart;n2:1;M;Satzart-ID
+2606:bbn_lieferant;n7:3;M;bbn des Lieferanten
+2606:bbn_rechnungsempfaenger;n7:10;M;bbn des Rechnungsempfaengers
+2606:beleg_kz;n1:17;M;Kennzeichen - 1 = Belegnummer
+2606:beleg_nr;n..7:18;M;Belegnummer
+2606:basiswert_1;n..11:25;M;Basiswert 1, 4 Nachkommastellen
+2606:zu_abschlag_kz_1;n1:36;M;Beschreibung des Zu-/Abschlags 1
+2606:zu_abschlag_1;n..8:37;M;Zu-/Abschlag 1
+2606:schluessel_1;n3:45;C;Schluessel zum Zu-/Abschlag 1, Nr. 10
+2606:basiswert_2;n..11:48;M;Basiswert 2, 4 Nachkommastellen
+2606:zu_abschlag_kz_2;n1:59;M;Beschreibung des Zu-/Abschlags 2
+2606:zu_abschlag_2;n..8:60;M;Zu-/Abschlag 2
+2606:schluessel_2;n3:68;C;Schluessel zum Zu-/Abschlag 2, Nr. 10
+2606:basiswert_3;n..11:71;M;Basiswert 3, 4 Nachkommastellen
+2606:zu_abschlag_kz_3;n1:82;M;Beschreibung des Zu-/Abschlags 3
+2606:zu_abschlag_3;n..8:83;M;Zu-/Abschlag 3
+2606:schluessel_3;n3:91;C;Schluessel zum Zu-/Abschlag 3, Nr. 10
+2606:basiswert_4;n..11:94;M;Basiswert 4, 4 Nachkommastellen
+2606:zu_abschlag_kz_4;n1:105;M;Beschreibung des Zu-/Abschlags 4
+2606:zu_abschlag_4;n..8:106;M;Zu-/Abschlag 4
+2606:schluessel_4;n3:114;C;Schluessel zum Zu-/Abschlag 4, Nr. 10
+2606:frei1;an..9:117;C;Frei
+2606:positions_nr;n..6:126;M;Positionsnummer des Satzes
+2606:frei2;an..15:132;C;Frei
+2606:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+2608:satzart;n2:1;M;Satzart-ID
+2608:bbn_lieferant;n7:3;M;bbn des Lieferanten
+2608:bbn_rechnungsempfaenger;n7:10;M;bbn des Rechnungsempfaengers
+2608:beleg_kz;n1:17;M;Kennzeichen - 1 = Belegnummer
+2608:beleg_nr;n..7:18;M;Belegnummer
+2608:freitext;an..101:25;M;Erlaeuterungen
+2608:positions_nr;n..6:126;M;Positionsnummer des Satzes
+2608:frei1;an..15:132;C;Frei
+2608:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+2700:satzart;n2:1;M;Satzart-ID
+2700:bbn_lieferant;n7:3;M;bbn des Lieferanten
+2700:bbn_rechnungsempfaenger;n7:10;M;bbn des Rechnungsempfaengers
+2700:beleg_kz;n1:17;M;Kennzeichen - 1 = Belegnummer
+2700:beleg_nr;n..7:18;M;Belegnummer
+2700:ust_kz;n1:25;M;Umsatzsteuer-Kennzeichen, Nr. 1
+2700:warenbetrag;n..10:26;M;Warenbetrag oder Menge
+2700:frei1;an..2:36;C;Frei
+2700:rechnungsrabatt_gesamt;n..8:38;C;Rechnungsrabatt gesamt
+2700:fracht_verpackung_kz;n1:46;M;Fracht-/Verpackungs-Kennzeichen, Nr. 8
+2700:frachtbelastung;n..7:47;C;Frachtbelastung (ausser wenn negativ)
+2700:skonto;n..7:54;C;Skonto - Zwei Nachkommastellen!
+2700:umsatzsteuer;n..8:61;C;Umsatzsteuer
+2700:endbetrag;n..9:69;M;Endbetrag der Rechnung
+2700:frei2;an..3:78;C;Frei
+2700:datum_rechnung;n5:81;M;Datum Rechnung, JMMTT
+2700:rabatt_kz_1;n2:86;C;Rabatt-Kennzeichen, Nr. 10
+2700:rechnungsrabatt_1;n..8:88;C;Rechnungsrabatt 1
+2700:rabatt_kz_2;n2:96;C;Rabatt-Kennzeichen, Nr. 10
+2700:rechnungsrabatt_2;n..8:98;C;Rechnungsrabatt 2
+2700:rabatt_kz_3;n2:106;C;Rabatt-Kennzeichen, Nr. 10
+2700:rechnungsrabatt_3;n..8:108;C;Rechnungsrabatt 3
+2700:rabatt_kz_4;n2:116;C;Rabatt-Kennzeichen, Nr. 10
+2700:rechnungsrabatt_4;n..8:118;C;Rechnungsrabatt 4
+2700:positions_nr;n..6:126;M;Positionsnummer des Satzes
+2700:b_vereinbarung_kz_1;n1:132;M;Kennzeichen Besondere Vereinbarungen 1
+2700:b_vereinbarung_1;n..8:133;C;Kennzeichen Besondere Vereinbarungen 1
+2700:b_vereinbarung_kz_2;n1:141;M;Kennzeichen Besondere Vereinbarungen 2
+2700:b_vereinbarung_2;n..5:142;C;Kennzeichen Besondere Vereinbarungen 2
+2700:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+2708:satzart;n2:1;M;Satzart-ID
+2708:bbn_lieferant;n7:3;M;bbn des Lieferanten
+2708:bbn_rechnungsempfaenger;n7:10;M;bbn des Rechnungsempfaengers
+2708:beleg_kz;n1:17;M;Kennzeichen - 1 = Belegnummer
+2708:beleg_nr;n..7:18;M;Belegnummer
+2708:freitext;an..101:25;M;Erlaeuterungen
+2708:positions_nr;n..6:126;M;Positionsnummer des Satzes
+2708:frei1;an..15:132;C;Frei
+2708:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+2900:satzart;n2:1;M;Satzart-ID
+2900:bbn_lieferant;n7:3;M;bbn des Lieferanten
+2900:bbn_rechnungslistenempfaenger;n7:10;M;bbn des Rechnungslistenempfaengers
+2900:bbn_zahlungsempfaenger;n7:17;M;bbn des Zahlungsempfaengers
+2900:bbn_zahlungsleistender;n7:24;M;bbn des Zahlungsleistenden
+2900:reli_kz;n1:31;M;Kennzeichen zu Rechungsliste, Nr. 15
+2900:nummer;n..7:32;C;Inhalt durch Kennzeichen bestimmt
+2900:valutadatum;n6:39;C;Valutadatum, JJMMTT
+2900:ust_kz;n1:45;M;USt.-Kennzeichen, Nr. 9
+2900:konditionsbasis;n..10:46;C;Wert/Menge, auf die eine Vv gewaehrt wird
+2900:umsatzsteuer;n..9:56;M;Umsatzsteuer
+2900:endbetrag;n..10:65;M;Rechnungsendbetrag
+2900:frei1;an..6:75;C;Frei
+2900:datum_reli;n5:81;C;Datum Rechnungsliste, JMMTT
+2900:abkommen_nr;n1:86;C;Abkommen-Nr., bilateral vereinbart
+2900:vertragsverguetung;n..9:87;C;Vv, Betrag mit 2 Nachkommastellen
+2900:ust_vv_kz_1;n1:96;C;USt.-Kennzeichen auf Vv 1, Nr. 9
+2900:ust_vv_1;n..8:97;C;Umsatzsteuer auf Vv 1
+2900:zahlbetrag;n..10:105;M;Zahlbetrag, 2 Kommastellen
+2900:frei2;an2:115;C;Frei
+2900:ust_vv_kz_2;n1:117;M;USt.-Kennzeichen auf Vv 2, Nr. 9
+2900:ust_vv_2;n..8:118;C;Umsatzsteuer auf Vv 2
+2900:positions_nr;n..6:126;M;Positionsnummer des Satzes
+2900:b_vereinbarung_kz_1;n1:132;M;Kennzeichen Besondere Vereinbarungen 1
+2900:b_vereinbarung_1;n..8:133;C;Kennzeichen Besondere Vereinbarungen 1
+2900:b_vereinbarung_kz_2;n1:141;M;Kennzeichen Besondere Vereinbarungen 2
+2900:b_vereinbarung_2;n..5:142;C;Kennzeichen Besondere Vereinbarungen 2
+2900:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+5000:satzart;n2:1;M;Satzart-ID
+5000:bbn_absender;n7:3;M;bbn des Absenders
+5000:bbn_empfaenger;n7:10;M;bbn des Empfaengers
+5000:artikel_nr;an..11:17;C;Artikelnummer des Lieferanten
+5000:grundpreis;n..9:28;C;Preis vor Abzug von Rabatten, pro EAN-Einheit
+5000:menge_ean;n..4:37;M;Menge der VKE/Einzelstuecke in EAN-Fakturiereinheiten
+5000:verpackungsart;an..3:41;C;Art der Verpackung der EAN-F.Einh., z.B. FL=Flasche, DS=Dose, Codes siehe Anhang SEDAS-Handbuch
+5000:ust_kz;n1:44;C;Umsatzsteuer-Kennzeichen, Nr. 9
+5000:einheit_vke;n..7:45;C;Einheit der VKE/des Einzelstuecks in Gramm
+5000:preisbasis;an1:52;C;Preisbasis pro EAN-Einheit. 1=Stueck,2=Gewicht, E/Z/H/T=Einzel...Tausenderpreis
+5000:ean;n12:53;M;EAN ohne Pruefziffer
+5000:pruefziffer;n1:65;M;Pruefziffer zur EAN
+5000:klassifikation;n4:66;M;CCG-Klassifikation
+5000:schluessel_kz;n2:70;M;Schluessel-Kennzeichen, Nr. 14
+5000:komma_kz;n1:72;C;Komma-Kennzeichen, Nr. 4
+5000:sondereintrag;n..6:73;C;Sondereintrag
+5000:frei1;an..2:79;C;Frei
+5000:datum;n5:81;M;Datum im Format JMMTT
+5000:kurztext;an..10:86;C;Artikelkurztext, falls vorhanden
+5000:langtext;an..30:96;M;Artikellangtext
+5000:positions_nr;n..6:126;M;Positionsnummer des Satzes
+5000:kleinste_ean;n12:132;M;Kleinste EAN-Einheit 
+5000:pruefziffer_kleinste_ean;n1:144;M;Pruefziffer zur EAN
+5000:frei2;an..2:145;C;Frei
+5000:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+5018:satzart;n2:1;M;Satzart-ID
+5018:bbn_absender;n7:3;M;bbn des Absenders
+5018:bbn_empfaenger;n7:10;M;bbn des Empfaengers
+5018:frei1;an..36:17;C;Frei
+5018:ean;n12:53;M;EAN ohne Pruefziffer
+5018:ean_pz;n1:65;C;EAN-Pruefziffer
+5018:freitext;an..60:66;M;Text
+5018:positions_nr;n..6:126;M;Positionsnummer des Satzes
+5018:frei2;an..15:132;C;Frei
+5018:folgesatz_kz;n4:147;M;Folgesatz-Kennzeichen
+51:satzart;n2:1;M;Satzart-ID
+51:bbn_absender;n7:3;M;bbn des Absenders
+51:bbn_empfaenger;n7:10;M;bbn des Empfaengers
+51:refpos_nr;n..6:17;M;Positionsnummer des Satzes, dessen bbs nvollstaendig ist
+51:rechnung_nr;n..7:23;M;Rechnungsnummer, zu SA15/25
+51:liefernachweis_nr;n..7:30;M;Liefernachweis-Nummer, zu SA12/22, alternativ zu rechnung_nr befuellt
+51:bbs_kz;n1:37;M;Kennzeichen zu bbs
+51:bbn_warenempfaenger;n7:38;M;bbn der Grosshandlung/Zentrale
+51:interne_nr;n..6:45;M;Interne Kundennummer des Lieferanten, wenn keine bbs
+51:name_warenempfaenger;a..30:51;M;Name des Warenempfaengers
+51:datum_erstellung;n5:81;M;Erstellungsdatum der Datei, JMMDD
+51:plz_1;n4:86;C;Postleitzahl Wohnort Warenempfaenger, alternativ zu plz_2/laender_kz
+51:ort;a..19:90;M;Wohnort des Warenempfaengers
+51:laender_kz;an..3:109;C;Laenderkennzeichen des WE
+51:plz_2;an..6:112;C;PLZ des WE, mit laender_kz Alternative zu plz_1
+51:frei1;an..8:118;C;Frei
+51:positions_nr;n..6:126;M;Positionsnummer des Satzes
+51:strasse_postfach;an..19:132;C;Strasse, Hausnr, Postfach
+98:satzart;n2:1;M;Satzart-ID
+98:bbn_absender;n7:3;M;bbn des Absenders
+98:bbn_empfaenger;n7:10;M;bbn des Empfaengers
+98:datum_erstellung;n6:17;M;Maschinen-/Tagesdatum
+98:abrechnung_von;n6:23;M;Abrechnungszeitraum von, JJMMTT
+98:abrechnung_bis;n6:29;M;Abrechnungszeitraum bis, JJMMTT
+98:sedas1;an..25:35;C;SEDAS-intern
+98:frei1;an..8:60;C;Frei
+98:log_nr;n..8:68;M;Laufende Nummer der log. Datei pro Austauschtermin (!) zwischen Datenlieferant und -empfaenger
+98:rel_nr;n2:76;M;Release-Nummer, 05 = ab 1.04.1993
+98:frei2;an..5:78;C;Frei
+98:waehrungs_kz;n..2:83;M;Waehrungs-Kennzeichen, 01=DM, 02=oeS
+98:verschluesselungs_kz;n1:85;M;Verschluesselungs-Kennzeichen, 0=unverschluesselt, 01=verschluesselt vom Absender
+98:sortier_kz;n1:86;M;Sortierfolge-Kennzeichen, 0=Standard, 1=unsortiert
+98:satzanzahl;n..10:87;M;Satzanzahl, Null in 01
+98:frei3;an..29:97;C;Frei
+98:positions_nr;n..6:126;M;Positionsnummer des Satzes
+98:frei4;an..19:132;C;Frei
+99:satzart;n2:1;M;Satzart-ID
+99:bbn_absender_dt;n7:3;M;bbn des Absenders der Datei
+99:bbn_empfaenger_dt;n7:10;M;bbn des Empfaengers der Datei
+99:datum_erstellung;n6:17;M;Maschinen-/Tagesdatum
+99:dateistatus;an1:23;M;blank=Original, K=Konditionsabgleich, T=Test
+99:frei1;an..11:24;C;Frei
+99:sedas1;an..25:35;C;SEDAS-intern
+99:datei_archiv_nr;an..8:60;M;Nummer zur Kennzeichnung und Identifizierung der Datei
+99:lfd_nr_dt_empfaenger;n..8:68;M;Fortlaufende Nummer der Datei pro Empfaenger
+99:frei2;an..11:76;C;Frei
+99:dateianzahl;n..10:87;M;Anzahl logischer Dateien, >0 in SA99
+99:frei3;an..29:97;C;Frei
+99:positions_nr;n..6:126;M;Positionsnummer des Satzes
+99:frei4;an..19:132;C;Frei

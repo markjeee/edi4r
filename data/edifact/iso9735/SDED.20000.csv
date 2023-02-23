@@ -35,3 +35,9 @@
 0077;an3;C;Text reference code
 0078;an..70;M;Free form text
 0081;a1;C;Section identification
+0013;a3;C;Service segment tag, coded
+0083;an..3;C;Action, coded
+0085;an..3;C;Syntax error, coded
+0096;n..6;C;Segment position in message
+0098;n..3;C;Erroneous data element position in segment
+0104;n..3;C;Erroneous component data element position

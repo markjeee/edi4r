@@ -1,11 +1,15 @@
+# -*- encoding: iso-8859-1 -*-
 # Add-on to EDI module "EDI4R"
 # Classes for XML support, here: Basic classes
 #
 # :include: ../../AuthorCopyright
 #
-# $Id: rexml.rb,v 1.1 2006/08/01 11:14:29 werntges Exp $
+# $Id$
 #--
 # $Log: rexml.rb,v $
+# Revision 1.2  2007/03/14 23:59:25  werntges
+# Bug fix (Joko's report) in DE#to_xml: Attribute "instance" generated now
+#
 # Revision 1.1  2006/08/01 11:14:29  werntges
 # Initial revision
 #
@@ -23,6 +27,7 @@
 
 require 'rexml/document'
 # require 'diagrams-xml'
+require 'edi4r/ansi_x12-rexml' if EDI.constants.include? 'A'
 require 'edi4r/edifact-rexml' if EDI.constants.include? 'E'
 require 'edi4r/idoc-rexml'    if EDI.constants.include? 'I'
 
@@ -38,7 +43,7 @@ module EDI
     def to_xml( xel_parent, instance=1 )
       xel  = REXML::Element.new( normalized_class_name ) 
       xel.attributes["name"]  = @name
-      xel.attributes["instance"]  = instance if instance > 1
+      xel.attributes["instance"]  = instance.to_s if instance > 1
       xel_parent.elements << xel
       instance_counter = Hash.new(0)
       each do |obj| 
@@ -102,7 +107,7 @@ module EDI
       end
       hnd = REXML::Document.new( hnd ) if hnd.is_a? IO or hnd.is_a? String
 
-      key = hnd.root.attributes['standard_key']
+      key = hnd.root.attributes['standard_key'].strip
       raise "Unsupported standard key: #{key}" if key == 'generic'
       EDI::const_get(key)::const_get('Interchange').parse_xml( hnd )
 #      class_sym = (key+'Interchange').intern
@@ -112,9 +117,9 @@ module EDI
 
     def to_xml( xel_parent )
       externalID = "PUBLIC\n" + " "*9
-      externalID += "'-//FH Wiesbaden FB DCSM//DTD XML Representation of EDI data V1.2//EN'\n"
+      externalID += "'-//Hochschule RheinMain FB DCSM//DTD XML Representation of EDI data V1.2//EN'\n"
       externalID += " "*9
-      externalID += "'http://edi01.informatik.fh-wiesbaden.de/edi4r/edi4r-1.2.dtd'"
+      externalID += "'http://edi01.cs.hs-rm.de/edi4r/edi4r-1.2.dtd'"
       xel_parent << REXML::XMLDecl.new
       xel_parent << REXML::DocType.new( normalized_class_name, externalID )
 
@@ -124,7 +129,7 @@ module EDI
       pos = self.class.to_s =~ /EDI::((.*?)::)?Interchange/
       raise "This is not an Interchange object: #{rc}!" unless pos==0
       xel.attributes["standard_key"] = ($2 and not $2.empty?) ? $2 : "generic"
-      xel.attributes["version"] = @version
+      xel.attributes["version"] = @version.to_s
       xel.attributes.delete "name"
       rc
     end
@@ -244,9 +249,10 @@ module EDI
 
   class DE
 
-    def to_xml( xel_parent, instance=nil )
+    def to_xml( xel_parent, instance=1 )
       xel = REXML::Element.new( 'DE' ) 
       xel.attributes["name"] = @name
+      xel.attributes["instance"] = instance.to_s if instance > 1
       xel_parent.elements << xel
       xel.text = self.to_s( true ) # don't escape!
       xel

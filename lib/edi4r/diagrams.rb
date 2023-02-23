@@ -1,10 +1,11 @@
+# -*- encoding: iso-8859-1 -*-
 # Classes related to message diagrams and validation
 # for the EDI module "edi4r", a class library
 # to parse and create UN/EDIFACT and other EDI data
 #
 # :include: ../../AuthorCopyright
 #
-# $Id: diagrams.rb,v 1.8 2006/05/26 16:57:37 werntges Exp $
+# $Id: diagrams.rb,v 1.8 2006/05/26 16:57:37 werntges Exp werntges $
 #--
 # $Log: diagrams.rb,v $
 # Revision 1.8  2006/05/26 16:57:37  werntges
@@ -97,18 +98,25 @@ module EDI::Diagram
     # std:: The syntax standard key. Currently supported:
     #       - 'E' (EDIFACT),
     #       - 'I' (SAP IDOC)
+    #       - 'S' (SEDAS, experimental)
+    #       - 'A' (ANSI X.12, limited)
     # params:: A hash of parameters that uniquely identify the selected diagram.
     #          Internal use only - see source code for details.
     #
     def Diagram.create( std, params )
       case std
       when 'E' # UN/EDIFACT
-        par = {:d0051 => 'UN', 
-          #           :d0057 => '',
+        par = {
+          :d0051 => 'UN', 
+          :d0057 => nil,
           :is_iedi => false }.update( params )
       when 'I' # SAP IDocs
         par = params
         #      raise "Not implemented yet!"
+      when 'S' # SEDAS
+        par = params
+      when 'A' # ANSI X12
+        par = params
       else
         raise "Unsupported syntax standard: #{std}"
       end
@@ -120,7 +128,7 @@ module EDI::Diagram
         key = par.sort {|a,b| a.to_s <=> b.to_s}.hash
         obj = @@cache[key]
         return obj unless obj.nil?
-        
+
         obj = new( std, par )
         @@cache[key] = obj # cache & return it
 
@@ -132,13 +140,30 @@ module EDI::Diagram
 
     def initialize( std, par ) # :nodoc:
       case std
+      when 'A' # ANSI X12
+        @base_key = [par[:ST01], # msg type, e.g. 837
+          par[:GS08][0,3], # version
+          par[:GS08][3,2], # release, 
+          par[:GS08][5,1], # sub-version
+          '',
+          # par[:GS08][6..-1], # assoc. assigned code (subset)
+          ''].join(':')
+        @msg_type = par[:ST01]
+
+        @dir = EDI::Dir::Directory.create(std, par )
+#                                          :d0065 => @msg_type,
+#                                          :d0052 => par[:d0052], 
+#                                          :d0054 => par[:d0054], 
+#                                          :d0051 => par[:d0051], 
+#                                          :d0057 => par[:d0057], 
+#                                          :is_iedi => par[:is_iedi])
       when 'E' # UN/EDIFACT
         @base_key = [par[:d0065], # msg type
           par[:d0052], # version
           par[:d0054], # release, 
           par[:d0051], # resp. agency
-          '',
-          #                   par[:d0057],  # assoc. assigned code (subset)
+          # '',
+          par[:d0057], # assoc. assigned code (subset)
           ''].join(':')
         @msg_type = par[:d0065]
 
@@ -160,10 +185,23 @@ module EDI::Diagram
         @msg_type = par[:IDOCTYPE]
 
         @dir = EDI::Dir::Directory.create(std,
-                                          :DOCTYPE => @msg_type,
+                                          :IDOCTYPE => @msg_type,
                                           :EXTENSION => par[:EXTENSION], 
                                           :SAPTYPE => par[:SAPTYPE])
         #      raise "Not implemented yet!"
+
+      when 'S' # SEDAS
+        @base_key = [par[:SEDASTYPE],
+          '',
+          '',
+          '',
+          '',
+          #                   par[:d0057],  # assoc. assigned code (subset)
+          ''].join(':')
+        @msg_type = par[:SEDASTYPE]
+
+        @dir = EDI::Dir::Directory.create(std)
+
       else
         raise "Unsupported syntax standard: #{std}"
       end
@@ -219,20 +257,31 @@ module EDI::Diagram
     attr_reader :sg_name
 
     # A new Branch object is uniquely identified by the +key+ argument
-    # that selects the directory entry and its +sg_name+ (if nto top branch).
+    # that selects the directory entry and its +sg_name+ (if not top branch).
     # +root+ is a reference to the Diagram it belongs to.
 
     def initialize(key, sg_name, root)
-      #    puts "Creating branch for key `#{key+sg_name}'..."
+      # warn "Creating branch for key `#{key||''+sg_name||''}'..."
       @key = key
       @sg_name = sg_name
       @root = root
 
       @nodelist=[]
       b = @root.dir.message( key+sg_name.to_s )
-      raise "Lookup failed for key `#{key+sg_name.to_s}'" unless b
+=begin
+      # UN/EDIFACT subsets only:
+      if b.nil? && key =~ /(\w{6}:\w+:\w+:\w+:)(.+?)(:.*)/
+	puts "2: #{key}"
+	@key = key = $1+$3 # Discard the subset DE
+	puts "3: #{key}"
+	EDI::logger.warn "Subset #{$2} data not found - trying standard instead..."
+        b = @root.dir.message( key+sg_name.to_s )
+      end
+=end
+      raise EDI::EDILookupError, "Lookup failed for key `#{key+sg_name.to_s}' - known names: #{@root.dir.message_names.join(', ')}" unless b
       @desc = b.desc
       b.each {|obj| @nodelist << Node.create( obj.name, obj.status, obj.maxrep )}
+      raise "Empty branch! key, sg = #{key}, #{sg_name}" if @nodelist.empty?
     end
 
     #
@@ -297,6 +346,13 @@ module EDI::Diagram
       @nodelist.size
     end
 
+    # Returns TRUE if branch is empty. Example: 
+    #  The tail of a segment group that consists of just the trigger segment
+    #
+    def empty?
+      @nodelist.size==0
+    end
+
   end
 
 
@@ -327,7 +383,8 @@ module EDI::Diagram
 
     def initialize(name, status, rep) # :nodoc:
       @name, @status, @maxrep = name, status, rep
-      #    @template = EDI::Segment.new(name, nil, nil)
+      # @template = EDI::Segment.new(name, nil, nil)
+      # warn "Creating node: #{self.to_s}"
     end
 
     def to_s
@@ -430,7 +487,7 @@ module EDI::Diagram
     #
     def name;   node.name;   end
     def status; node.status; end
-    def maxrep; node.maxrep; end    
+    def maxrep; node.maxrep; end
     def index;  node.index;  end
 
     # Returns this node instance's level in the diagram.
@@ -475,10 +532,14 @@ module EDI::Diagram
       #    name = (seg.is_a? String) ? seg : seg.name
       begin
         node = self.node
-        # print "Looking for #{name} in #{self.name} @ level #{self.level}..."
+        # warn "Looking for #{name} in #{self.name} @ level #{self.level} while node.maxrep=#{node.maxrep}..."
         #
         # Case "match"
         #
+        if node.nil?
+          warn "#{name}: #{@coord.offset} #{@coord.branch.sg_name} #{@coord.branch.desc} #{@coord.branch.size}"
+          raise "#{self}: no node!"
+        end
         if name === node.name # == name
           #        puts "match!"
           @coord.inst_cnt += 1
@@ -532,7 +593,7 @@ module EDI::Diagram
     # Returns +self+, or +nil+ if there is no tail node.
     def down!
       this_node = self.node
-      return nil if (tail=this_node.tail).nil?
+      return nil if (tail=this_node.tail).nil? or tail.empty?
       # Save current co-ordinates on stack
       @coord_stack.push( @coord )
       # Init. co-ordinates for the new level:

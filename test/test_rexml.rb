@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# *-* encoding: iso-8859-1 -*-
 # :include: ../AuthorCopyright
 
 #######################################################################
@@ -10,9 +11,13 @@
 # Include statement during test setup:
 
 $:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
+$:.unshift File.join(File.dirname(__FILE__), '..', '..', 'tdid', 'lib')
+
 require 'edi4r'
 require 'edi4r/edifact'
 require 'edi4r/rexml'
+require 'edi4r-tdid'
+require 'edi4r/edifact-rexml'
 
 # Regular include statements:
 
@@ -62,14 +67,41 @@ class EDIFACT_REXML_Tests < Test::Unit::TestCase
   end
 
 
+  def test_joko
+    icx = nil
+    assert_nothing_raised do
+      icx = EDI::Interchange.parse(File.open("joko2.xml"))
+      assert_equal( 0, icx.validate )
+    end
+
+    ice = EDI::Interchange.parse(File.open("joko_in.edi"))
+    assert_equal( ice.to_s, icx.to_s )  # EDIFACT representations equal?
+    
+    se = StringIO.new
+    xdoc_e = REXML::Document.new
+    ice.to_xml(xdoc_e)
+    xdoc_e.write( se, 0 )
+    xdoc_e.write( File.open('joko2a.xml','w'), 0 )
+
+    sx = StringIO.new
+    xdoc_x = REXML::Document.new
+    icx.to_xml(xdoc_x)
+    xdoc_x.write( sx, 0 )
+
+    ie = EDI::E::Interchange.parse_xml( xdoc_e )
+    ix = EDI::E::Interchange.parse_xml( xdoc_x )
+    assert_equal( ie.to_s, ix.to_s )
+  end
+
+
   def test_groups
 
     xdoc = REXML::Document.new
     assert_nothing_raised{ @icg.to_xml( xdoc ) }
 
     sg = StringIO.new
-    xdoc.write( sg, 0 )
-#    xdoc.write( File.open("groups2.xml",'w'), 0 )
+    xdoc.write( sg )
+#    xdoc.write( File.open("groups2.xml",'w') )
 
     ic = nil
     assert_nothing_raised do

@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# -*- encoding: iso-8859-1 -*-
 # :include: ../AuthorCopyright
 
 # Load path magic...
@@ -21,7 +22,8 @@ class EDIFACT_Tests < Test::Unit::TestCase
     seg = msg.new_segment('DTM')
     msg.add seg
     seg.cC507.d2005 = '137'
-    t = Time.edifact('20060703', 102)
+    t = EDI::Time.edifact('20060703', 102)
+    assert_equal('20060703', t.to_s)
     seg.cC507.d2380 = t
     seg.cC507.d2379 = t.format
 
@@ -41,7 +43,7 @@ class EDIFACT_Tests < Test::Unit::TestCase
     seg = msg.new_segment('DTM')
     msg.add seg
     seg.cC507.d2005 = '137'
-    t = Time.new
+    t = EDI::Time.new
     t.format = 204
     seg.cC507.d2380 = t
     seg.cC507.d2379 = t.format
@@ -191,19 +193,24 @@ class EDIFACT_Tests < Test::Unit::TestCase
     assert_equal( 'PRI+AAA-\\-30.1--LIU', pri.to_s)
   end
 
-begin
   def test_interchange_parsing
+    mode = RUBY_VERSION >= '1.9' ? 'rb:iso-8859-15' : 'rb'
     assert_nothing_raised {
-      ic = EDI::E::Interchange.parse( File.open( './O0002248720','r' ), false )
+      # ic = EDI::E::Interchange.parse( File.open( './marius1.edi','r' ), true )
+      file = File.open './O0002248720', mode
+      ic = EDI::E::Interchange.parse file, false
+      file.close
       ic.output_mode = :indented
       File.open("invoic.out", "w") {|hnd| hnd.print ic}
     }
-    assert_nothing_raised {
-      ic = EDI::E::Interchange.parse( File.open( './remadv101.edi', 'r' ) )
-      ic.output_mode = :indented
+    # assert_nothing_raised {
+      file = File.open './remadv101.edi', mode 
+      ic = EDI::E::Interchange.parse file
+      # ic.output_mode = :indented
+      file.close
       File.open("remadv.out", "w") {|hnd| hnd.print ic}
 #      $stdout.write ic
-    }
+      ic.validate
+    # }
   end
-end
 end 

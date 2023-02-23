@@ -1,17 +1,11 @@
 #!/usr/bin/env ruby
-
-# $Id: edi2xml.rb,v 1.1 2006/08/01 11:20:24 werntges Exp $
-
-# $Log: edi2xml.rb,v $
-# Revision 1.1  2006/08/01 11:20:24  werntges
-# Initial revision
+# -*- encoding: ISO-8859-1 -*-
 #
-#
-# Author:  Heinz W. Werntges (edi@informatik.fh-wiesbaden.de)
+# Author:  Heinz W. Werntges (edi@cs.hs-rm.de)
 #
 # License: This code is put under the Ruby license
 #
-# Copyright (c) 2006 Heinz W. Werntges, FH Wiesbaden
+# Copyright (c) 2006, 2011 Heinz W. Werntges, Hochschule RheinMain, Wiesbaden
 #
 
 # SYNOPSIS:
@@ -30,10 +24,12 @@
 # 
 
 require "rubygems"
-require_gem "edi4r"
-require_gem "edi4r-tdid"
-#require_gem "edi4r-idoc"
+require "edi4r"
+require "edi4r-tdid"
+#require "edi4r-idoc"
 require "edi4r/edifact"
+require "edi4r/ansi_x12"
+require "edi4r/sedas"
 require "edi4r/rexml"
 
 require "getoptlong"
@@ -44,7 +40,7 @@ def output( ic )
     fail "DIN 16557 applies only to UN/EDIFACT data" unless ic.syntax=='E'
     ic.to_din16557_4.write($stdout,0)
   else
-    ic.to_xml.write($stdout,0)
+    ic.to_xml.write($stdout)
   end
 end
 
@@ -54,12 +50,12 @@ def usage_and_exit
 Usage:
   #$0 [-D] [files ...]
   #$0 [-D] -z edifile.gz [files ...]     (Zlib required)
-  #$0 -s E|I [-D]   (reads from stdin, E)difact or SAP I)doc)
+  #$0 -s A|E|I [-D]   (reads from stdin, A)NSI X12, E)difact or SAP I)doc)
 Options:
  -d    Activates debug mode by setting $DEBUG=true
  -D    Generate DIN 16557-4 output.
- -s k  Set standard key, k=E for UN/EDIFACT (default) or k=I for SAP IDOC
-       (currently only E supported).
+ -s k  Set standard key, k=E for UN/EDIFACT (default), k=A fir ANSI X12, or k=I for SAP IDOC
+       (currently only E and A supported).
  -z    Require Zlib. You may then pass gzipped files directly.
        Note that Zlib is not always available.
 EOT

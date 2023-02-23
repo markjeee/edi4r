@@ -9,7 +9,6 @@
 
 === Require statements
 
- require "rubygems"
  require "edi4r"         # Try require_gem if this fails on your site
  require "edi4r/edifact"
  require "edi4r-tdid"    # Try require_gem if this fails on your site
@@ -58,7 +57,7 @@ at any other location. If you need to do that, hold your messages
 in an array, sort them any way you like, and finally add them 
 to the interchange in the desired sequence.
 
-Note that each messag gets validated by default when you add it to
+Note that each message gets validated by default when you add it to
 the interchange. If your message needs to be completed only later,
 you may disable validation by calling:
 
@@ -596,7 +595,7 @@ To be supplied later; currently just a room to collect keywords to cover.
   Segments: T-nodes, ordinal number, index, occurrence, max. occurrence
   empty?, required?
 
-=== More advances features
+=== More advanced features
 
   Validation: warnings and exceptions (logging?)
   Add-ons to class Time

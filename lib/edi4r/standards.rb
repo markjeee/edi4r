@@ -1,3 +1,4 @@
+# -*- encoding: iso-8859-1 -*-
 # Classes providing access to directories of EDI standards like
 # the UN Trade Data Interchange Directories (UNTDID) and Subsets,
 # or ISO7389, or SAP IDoc definitions.
@@ -7,9 +8,15 @@
 #
 # :include: ../../AuthorCopyright
 #
-# $Id: standards.rb,v 1.9 2006/08/01 11:00:35 werntges Exp $
+# $Id: standards.rb,v 1.11 2007/08/21 17:11:13 werntges Exp werntges $
 #--
 # $Log: standards.rb,v $
+# Revision 1.11  2007/08/21 17:11:13  werntges
+# Now with some SEDAS support; moving on to support ANSI X12
+#
+# Revision 1.10  2007/03/19 08:52:44  werntges
+# Intermediate check-in: Basic subset support added, now going to add SEDAS
+#
 # Revision 1.9  2006/08/01 11:00:35  werntges
 # EDI_NDB_PATH: Now platform independent
 #
@@ -48,11 +55,11 @@
 module EDI
   module Dir
 
-    DE_Properties = Struct.new( :name, :format, :status, :dummy, :description)
+    DE_Properties = Struct.new( :name, :format, :status, :dummy, :description )
 
     # Common structure of B)ranch (of a msg), C)DE, D)E, S)egment
     #
-    BCDS_entry = Struct.new( :item_no, :name, :status, :maxrep)
+    BCDS_entry = Struct.new( :item_no, :name, :status, :maxrep )
 
     # Named_list:
     #
@@ -99,7 +106,7 @@ module EDI
       # As long as we employ plain CSV files to store directories, a Directory
       # can become quite memory-consuming.
       # Therefore Directorys are cached after creation, so that they
-      # need to be created and maintained only once when there areeseveral
+      # need to be created and maintained only once when there are several
       # messages of the same type in an interchange.
       #
       # Turns off this caching mechanism, saving memory but costing time.
@@ -132,14 +139,17 @@ module EDI
       # existing directory when already in cache.
       #
       # std:: The syntax standard key. Currently supported:
+      #       - 'A' (ANSI X12),
       #       - 'E' (EDIFACT),
       #       - 'I' (SAP IDOC)
+      #       - 'S' (SEDAS)
       # params:: A hash of parameters that uniquely identify the selected dir.
       #          Hash parameters use following alternative key sets:
       #
       # ISO9735::  :d0002, :d0076 (default: "", nil)
       # UN/TDID::  :d0065, :d0052, :d0054, :d0051, :d0057; :is_iedi
       # SAP IDOC:: :IDOCTYPE, :SAPTYPE, :EXTENSION (see EDI_DC fields)
+      # SEDAS::    (none so far)
       #
       # UN/TDID: Elements of S009 or S320 are used:
       # d0065:: Message type like "INVOIC"
@@ -151,14 +161,19 @@ module EDI
       # Interactive EDI (only limited supported so far):
       # is_iedi:: Flag, +true+ or +false+. Assumed +false+ if missing.
       #
-      def Directory.create( std, params )
+      def Directory.create( std, params={} )
 
         case std
+        when 'A' # ANSI X12
+          # par = { :ISA12 => '00401', :is_iedi => false }.update( params )
+          par = { }.update( params )
         when 'E' # UN/EDIFACT
-          par = {:d0051 => '', 
+          par = {:d0051 => '',
                  :d0057 => '',
                  :is_iedi => false }.update( params )
         when 'I' # SAP IDocs
+          par = { }.update( params )
+        when 'S' # SEDAS
           par = { }.update( params )
         else
           raise "Unsupported syntax standard: #{std}"
@@ -170,9 +185,11 @@ module EDI
           #
           key = par.sort {|a,b| a.to_s <=> b.to_s}.hash
           obj = @@cache[key]
+          # warn "Looking up  #{par.inspect} with key=#{key}"
           return obj unless obj.nil?
 
           obj = new( std, par )
+          # warn "Caching for #{par.inspect} with key=#{key}"
           @@cache[key] = obj # cache & return it
 
         else
@@ -213,7 +230,7 @@ module EDI
           end
 
         when 'E' # UN/EDIFACT
-          prefix = '/edifact' 
+          prefix, subset_prefix = '/edifact', nil
           if par[:d0002] # ISO9735 requested?
             case par[:d0002]
             when 1
@@ -232,16 +249,67 @@ module EDI
             prefix += '/iso9735/SD'
             ext += '.csv'
 
+	  # Service messages? (AUTACK, CONTRL, KEYMAN): 2/2, D/3, 4/1 ok
+	  elsif %w/2 D 4/.include?(par[:d0052]) && %w/2 3 1/.include?(par[:d0054])
+	    if par[:d0052] == '2' && par[:d0054] == '2'
+	      ext = '20000'
+	    elsif par[:d0052] == 'D' && par[:d0054] == '3'
+	      ext = '30000'
+	    elsif par[:d0052] == '4' && par[:d0054] == '1'
+              ext = (par[:d0076] == nil) ? '40000' : '40100'
+            else
+              raise "Invalid syntax version: #{par[:d0002]}"
+            end
+            prefix += '/iso9735/SD'
+            ext += '.csv'
+
           else		# UN/TDID requested?
             prefix += par[:is_iedi] ? '/untdid/ID' : '/untdid/ED'
-            ext = (par[:d0052]+par[:d0054]).downcase + '.csv'
+            ext = (par[:d0052].to_s+par[:d0054].to_s).downcase + '.csv'
+            case par[:d0057]
+            when /EAN\d\d\d/, /EDIT\d\d/
+              subset_prefix = '/edifact/eancom/ED'
+            when '', nil
+            else
+              # raise "Subset not supported: #{par[:d0057]}"
+	      EDI::logger.warn "Subset not supported: #{par[:d0057]}"
+            end
+          end
+        when 'S' # SEDAS
+          prefix, subset_prefix, ext = '/sedas/ED', nil, '.csv'
+
+        when 'A' # ANSI X12
+          prefix, subset_prefix = '/ansi', nil
+          if par[:ISA12] # control segments requested?
+            msg = "Syntax version not supported: #{par[:ISA12]}"
+            case par[:ISA12]
+            when /00[1-5]0\d/ # , '00401', '00501' etc.
+	      EDI::logger.warn msg if par[:ISA12] !~ /^00[45]01$/
+              ext = par[:ISA12]
+            else
+              raise msg
+            end
+            prefix += '/x12/SD'
+            ext += '.csv'
+
+          else		# Standards directory requested?
+            prefix += '/dir/ED'
+            ext = par[:GS08][0,6] + '.csv' # Subset not supported
+            case par[:GS08][6..-1]
+            when 'X098', 'X098A1', 'X096A1', 'X093', 'X092', 'X091A1', 'X222A1', 'X223A2', /^X2\d\d(A[12])?/
+	      # Conceivable support of a major subset (like HIPAA)
+              # subset_prefix = '/ansi/hipaa/ED' 
+            when '', nil
+            else
+              raise "Subset not supported: <<#{par[:GS08][6..-1]}>>"
+            end
           end
 
         else
           raise "Unsupported syntax standard: #{std}"
         end
 
-        return prefix, ext
+        return prefix, subset_prefix, ext
       end
 
 
@@ -251,14 +319,30 @@ module EDI
       # Will be generalized to a lookup scheme!
       #
       def Directory.path_finder( prefix, ext, selector )
-        filename = prefix + selector + '.' + ext
-        searchpath = ENV['EDI_NDB_PATH']
+        #
+        # Subset requested: 
+        #  Try subset first, warn & fall back on standard before giving up
+        #
+        if prefix.is_a? Array
+          raise "Only subset and regular prefix expected" if prefix.size != 2
+          begin
+            Directory.path_finder( prefix[0], ext, selector )
+          rescue EDILookupError
+            # warn "Subset data not found - falling back on standard"
+            # $stderr.puts prefix.inspect, ext.inspect, selector.inspect
+            Directory.path_finder( prefix[1], ext, selector )
+          end
+        else
+          filename = prefix + selector + '.' + ext
+          searchpath = ENV['EDI_NDB_PATH']
 
-        searchpath.split(/#{File::PATH_SEPARATOR}/).each do |datadir|
-          path = datadir + filename
-          return path if File.readable? path
+          searchpath.split(/#{File::PATH_SEPARATOR}/).each do |datadir|
+            path = datadir + filename
+            # warn "Looking for #{path}"
+            return path if File.readable? path
+          end
+          raise EDILookupError, "No readable file '." + filename + "' found below any dir on '" + searchpath + "'"
         end
-        raise "No readable file '." + filename + "' found below any dir on '" + searchpath + "'"
       end
 
       #
@@ -266,17 +350,19 @@ module EDI
       #
       def initialize ( std, par ) # :nodoc:
 
-        prefix, ext = Directory.prefix_ext_finder( std, par )
+        prefix, subset_prefix, ext = Directory.prefix_ext_finder( std, par )
 
         # Build DE directory
 
         prefix_ed = prefix.sub(/ID$/, 'ED') # There is no IDED.*.csv!
-        csvFileName = Directory.path_finder(prefix_ed, ext, 'ED' )
+        _prefix = subset_prefix.nil? ? prefix_ed : [subset_prefix, prefix_ed]
+
+        csvFileName = Directory.path_finder(_prefix, ext, 'ED' )
         @de_dir = Hash.new
         IO.foreach(csvFileName) do |line|
           d = DE_Properties.new
           d.name, d.format, d.dummy, d.description = line.strip.split(/;/)
-          $stderr.puts "ERR DE line", line if d.description.nil?
+          EDI::logger.warn "ERR DE line: "+line if d.description.nil?
           @de_dir[d.name] = d 
         end
 
@@ -287,9 +373,9 @@ module EDI
         IO.foreach(csvFileName) do |line|
           c = Named_list.new
           c.name, c.desc, list = line.split(/;/, 3)
-          $stderr.puts "ERR CDE line", line if list.nil?
+          EDI::logger.warn "ERR CDE line: "+line if list.nil?
           list.sub(/;\s*$/,'').split(/;/).each_slice(4) do |item, code, status, fmt|
-            $stderr.puts "ERR CDE list", line if fmt.nil?
+            EDI::logger.warn "ERR CDE list: "+line if fmt.nil?
             c << BCDS_entry.new( item, code, status, 1 )
           end
           @cde_dir[c.name] = c
@@ -297,36 +383,44 @@ module EDI
 
         # Build Segment directory
 
-        csvFileName = Directory.path_finder(prefix, ext, 'SD' )
+        _prefix = subset_prefix.nil? ? prefix : [subset_prefix, prefix]
+        csvFileName = Directory.path_finder( _prefix, ext, 'SD' )
         @seg_dir = Hash.new
         IO.foreach(csvFileName) do |line|
           c = Named_list.new
           c.name, c.desc, list = line.split(/;/, 3)
-          $stderr.puts "ERR SEG line", line if list.nil?
+          EDI::logger.warn "ERR SEG line: "+line if list.nil?
           list.sub(/;\s*$/,'').split(/;/).each_slice(4) do |item, code, status, maxrep|
-            $stderr.puts "ERR SEG list", line if maxrep.nil?
-            c << BCDS_entry.new( item, code, status, maxrep.to_i )
+            EDI::logger.warn "ERR SEG list: "+line if maxrep.nil?
+	    maxrep = maxrep=='>1' ? 1 << 30 : maxrep.to_i # Use 2**30 instead of Infinity
+            c << BCDS_entry.new( item, code, status, maxrep )
           end
           @seg_dir[c.name] = c
         end
 
         # Build Message directory
-        
-        csvFileName = Directory.path_finder(prefix, ext, 'MD' )
+
+        _prefix = subset_prefix.nil? ? prefix : [subset_prefix, prefix]
+        csvFileName = Directory.path_finder( _prefix, ext,'MD' )
         @msg_dir = Hash.new
         re = if par[:d0065] and par[:d0065] =~ /([A-Z]{6})/ 
-             then Regexp.new($1) else nil end
+             then Regexp.new($1) else nil end # UN/EDIFACT
+        re = if par[:ST01] and par[:ST01] =~ /(\d{3})/ 
+             then Regexp.new('^'+$1) else nil end unless re # ANSI - Try again
+
         IO.foreach(csvFileName) do |line|
           next if re and line !~ re # Only lines matching message type if given
           c = Named_list.new
           c.name, c.desc, list = line.split(/;/, 3)
-          $stderr.puts "ERR MSG line", line if list.nil?
+          EDI::logger.warn "ERR MSG line: "+line if list.nil?
           list.sub(/;\s*$/,'').split(/;/).each_slice(3) do |code, status, maxrep|
-            $stderr.puts "ERR MSG list", line if maxrep.nil?
-            c << BCDS_entry.new( "0000", code, status, maxrep.to_i )
+            EDI::logger.warn "ERR MSG list: "+line if maxrep.nil?
+	    maxrep = maxrep=='>1' ? 1 << 30 : maxrep.to_i # Use 2**30 instead of Infinity
+            c << BCDS_entry.new( "0000", code, status, maxrep )
           end
           @msg_dir[c.name] = c
         end
+
       end # initialize
 
 
@@ -382,8 +476,16 @@ module EDI
       # Returns CSV line of top branch for message called +name+.
       #
       def message( name ) # Actually, only one branch!
-#        $stderr.puts name
-        @msg_dir[name]
+        # p name
+        # p @msg_dir# [name]
+        rc = @msg_dir[name]
+        return rc unless rc.nil?
+        # Try without subset if nil:
+	# ex.: CONTRL:D:3:UN:1.3c:SG1, CONTRL:D:3:UN::
+        return nil unless name =~ /(.*:)([^:]{1,6})(:[^:]*)/
+	EDI::logger.warn "Subset not supported: #$2 - falling back on standard}" if $3==':' # warn only at top branch
+        # $stderr.puts "Using fallback name: #{$1+$3}"
+        @msg_dir[$1+$3]
       end
 
       # Returns a sorted list of names of available messages
@@ -407,7 +509,7 @@ module EDI
         case id
         when /^[CES]\d{3}$/	# C)omposite
           list = cde(id)
-          
+
         when /^\d{4}$/		# Simple D)E
           list = de(id)
 
@@ -480,6 +582,21 @@ if __FILE__ == $0
                                  :d0054 =>'96A')
 
   puts d.message_names; gets
+
+  # SEDAS tests
+
+  s = EDI::Dir::Directory.create('S')#,
+#                                 :d0052 =>'D', 
+#                                 :d0054 =>'96A')
+
+  puts s.message_names; gets
+
+  # ANSI X12 tests
+
+  s = EDI::Dir::Directory.create('A', :ISA12 =>'00401' )
+  puts s.message_names; gets
+  s = EDI::Dir::Directory.create('A', :GS08 =>'004010X098' )
+  puts s.message_names; gets
 
   # SAP IDOC tests (should fail now!)
 

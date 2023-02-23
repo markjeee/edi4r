@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# -*- encoding: iso-8859-1 -*-
 #
 # Mapping demo: Outbound, from inhouse to EANCOM
 #
