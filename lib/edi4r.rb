@@ -923,7 +923,7 @@ module EDI
         #
         # Charset check
         #
-        if (pos = (value =~ root.illegal_charset_pattern))# != nil
+        if (pos = (!value.is_a?(Numeric) && value =~ root.illegal_charset_pattern))# != nil
           EDI::logger.warn "#{location}: Illegal character: #{value[pos].chr} (#{value[pos]})"
           err_count += 1
         end
